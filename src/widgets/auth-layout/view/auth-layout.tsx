@@ -17,13 +17,15 @@ export function AuthLayout({
 }) {
   return (
     <div className='flex justify-center items-center min-h-screen'>
-      <Card className='w-[500px] rounded bg-[#393939] border-none'>
+      <Card className='w-[500px] rounded-lg bg-[#393939] border-none px-[77px]! pt-12! pb-9!'>
         <CardHeader>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className='text-white text-center text-3xl mb-[15px]'>
+            {title}
+          </CardTitle>
         </CardHeader>
         <CardContent className='px-[50px] py-[80px]'>{form}</CardContent>
         <CardFooter className='flex justify-center'>
-          <p className='text-muted-foreground [&_a]:underline [&_a]:text-[##F5D91F]'>
+          <p className='text-muted-foreground [&_a]:underline [&_a]:text-[##F5D91F] leading-[100%]'>
             {footerText}
           </p>
         </CardFooter>

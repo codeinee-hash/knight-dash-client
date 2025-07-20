@@ -21,18 +21,23 @@ export function RegisterForm() {
   return (
     <Form {...form}>
       <form
-        className='flex flex-col items-center gap-[15px] py-[50px] px-[80px]'
+        className='w-full flex flex-col items-center gap-[15px]'
         onSubmit={form.handleSubmit(register)}
       >
-        <div className='text-white text-3xl mb-[15px]'>{'Registration'}</div>
         <FormField
           control={form.control}
           name='login'
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name:</FormLabel>
+            <FormItem className='w-full'>
+              <FormLabel className='text-base leading-[100%] font-medium text-white mb-2'>
+                Имя:
+              </FormLabel>
               <FormControl>
-                <Input placeholder='RenamedUser_228' {...field} />
+                <Input
+                  placeholder='RenamedUser_228'
+                  {...field}
+                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -42,10 +47,17 @@ export function RegisterForm() {
           control={form.control}
           name='telephone'
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone number:</FormLabel>
+            <FormItem className='w-full'>
+              <FormLabel className='text-base leading-[100%] font-medium text-white mb-2'>
+                Телефон:
+              </FormLabel>
               <FormControl>
-                <Input type='tel' placeholder='+996500210023' {...field} />
+                <Input
+                  type='tel'
+                  placeholder='+996500210023'
+                  {...field}
+                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -54,9 +66,9 @@ export function RegisterForm() {
         <Button
           disabled={isPending}
           type='submit'
-          className='cursor-pointer my-[15px]'
+          className='w-full mt-4 h-[44px] rounded-[10px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
         >
-          Sign in
+          Зарегистрироваться
         </Button>
       </form>
     </Form>

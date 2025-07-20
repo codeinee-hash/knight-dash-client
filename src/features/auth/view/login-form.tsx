@@ -21,21 +21,22 @@ export function LoginForm() {
   return (
     <Form {...form}>
       <form
-        className='w-full flex flex-col items-center gap-[15px] py-[50px] px-[80px]'
+        className='w-full flex flex-col items-center gap-[15px]'
         onSubmit={form.handleSubmit(login)}
       >
-        <div className='text-white text-3xl mb-[15px]'>{'Registration'}</div>
         <FormField
           control={form.control}
           name='login'
           render={({ field }) => (
             <FormItem className='w-full'>
-              <FormLabel className='text-[20px] mb-2'>Name:</FormLabel>
+              <FormLabel className='text-base leading-[100%] font-medium text-white mb-2'>
+                Имя:
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder='RenamedUser_228'
                   {...field}
-                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-4 text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
+                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
                 />
               </FormControl>
               <FormMessage className='text-red-500 text-sm mt-1 -mb-2' />
@@ -47,13 +48,15 @@ export function LoginForm() {
           name='telephone'
           render={({ field }) => (
             <FormItem className='w-full'>
-              <FormLabel className='text-[20px] mb-2'>Phone number:</FormLabel>
+              <FormLabel className='text-base leading-[100%] font-medium text-white mb-2'>
+                Телефон:
+              </FormLabel>
               <FormControl>
                 <Input
                   type='tel'
                   placeholder='+996500210023'
                   {...field}
-                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-4 text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
+                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
                 />
               </FormControl>
               <FormMessage className='text-red-500 text-sm mt-1 -mb-2' />
@@ -63,9 +66,9 @@ export function LoginForm() {
         <Button
           disabled={isPending}
           type='submit'
-          className='w-full mt-4 h-[44px] rounded-[10px] bg-[#f5d91f] text-black font-medium text-base hover:bg-[#f0b700] transition-colors'
+          className='w-full mt-4 h-[44px] rounded-[10px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
         >
-          Sign in
+          Войти
         </Button>
       </form>
     </Form>
