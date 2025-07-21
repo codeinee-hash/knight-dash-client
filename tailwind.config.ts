@@ -9,7 +9,7 @@ const config: Config = {
         'max-md': { raw: '(max-width: 767px)' },
         'max-lg': { raw: '(max-width: 1023px)' },
         'max-xl': { raw: '(max-width: 1279px)' },
-
+        // custom points
         'max-xs': { raw: '(max-width: 399px)' },
       },
     },
