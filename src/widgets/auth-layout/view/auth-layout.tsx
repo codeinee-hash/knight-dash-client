@@ -16,10 +16,10 @@ export function AuthLayout({
   footerText: React.ReactNode;
 }) {
   return (
-    <div className='flex justify-center items-center min-h-screen'>
-      <Card className='w-[500px] rounded-lg bg-[#393939] border-none px-[77px]! pt-12! pb-9!'>
+    <div className='flex justify-center items-center min-h-screen container mx-auto! max-sm:px-[20px]!'>
+      <Card className='w-[500px] rounded-lg bg-[#393939] border-none px-[77px]! pt-12! pb-9! max-sm:px-[20px]!'>
         <CardHeader>
-          <CardTitle className='text-white text-center text-3xl mb-[15px]'>
+          <CardTitle className='text-white text-center text-3xl mb-[15px]!'>
             {title}
           </CardTitle>
         </CardHeader>

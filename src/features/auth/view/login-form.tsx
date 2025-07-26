@@ -39,7 +39,7 @@ export function LoginForm() {
                   className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
                 />
               </FormControl>
-              <FormMessage className='text-red-500 text-sm mt-1 -mb-2' />
+              <FormMessage className='text-[#fb2c36] text-sm' />
             </FormItem>
           )}
         />
@@ -59,7 +59,7 @@ export function LoginForm() {
                   className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
                 />
               </FormControl>
-              <FormMessage className='text-red-500 text-sm mt-1 -mb-2' />
+              <FormMessage className='text-[#fb2c36] text-sm' />
             </FormItem>
           )}
         />

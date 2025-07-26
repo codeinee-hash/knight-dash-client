@@ -1,7 +1,6 @@
 import { useEffect, useState, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../features/auth/model/use-auth';
-import { useUser } from '../../features/auth/model/use-user';
 import { BoardComponent } from '../../features/board';
 import { Board } from '../../features/board/model/board';
 import Logo2 from '../../shared/assets/images/geeks 2.png';
@@ -16,9 +15,7 @@ import styles from './intro-page.module.scss';
 const IntroPage: FC = () => {
   const [board, setBoard] = useState(new Board());
   const setIsGameOver = useGame((s) => s.setIsGameOver);
-  const setStartedAt = useGame((state) => state.setStartedAt);
   const navigate = useNavigate();
-  const { clearPlayer } = useUser();
   const logout = useAuth((s) => s.logout);
 
   useEffect(() => {
@@ -81,17 +78,7 @@ const IntroPage: FC = () => {
           >
             Start the game
           </button>
-          <button
-            onClick={() =>
-              logout(
-                () => navigate(ROUTES.HOME),
-                () => clearPlayer(),
-                setStartedAt
-              )
-            }
-            type='button'
-            className={styles.quit}
-          >
+          <button onClick={logout} type='button' className={styles.quit}>
             Exit
           </button>
         </div>

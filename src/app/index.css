@@ -20,6 +20,7 @@ body {
 #root {
   width: 100%;
   height: 100%;
+  background-image: url('../shared//assets//images/Geeks_pattern_grey1.png');
   background-color: #4b4b4b;
   background-size: cover;
   background-repeat: no-repeat;

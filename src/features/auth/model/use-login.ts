@@ -22,7 +22,9 @@ export function useLogin() {
     },
     onError(error) {
       if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.message || 'Ошибка при регистрации');
+        toast.error(
+          error.response?.data?.errors[0] || 'Ошибка при регистрации'
+        );
       }
     },
   });

@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: ROUTES.INTRO,
-            lazy: () => import('@/pages/intro/intro-page'),
+            lazy: () => import('@/pages/intro/intro.page'),
           },
           {
             path: ROUTES.GAME_ROOM,

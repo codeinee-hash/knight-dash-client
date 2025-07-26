@@ -7,7 +7,7 @@ import { Toaster } from 'sonner';
 export const App: FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <main className='container mx-auto! min-h-screen flex flex-col max-sm:px-[16px]!'>
+      <main className='min-h-screen flex flex-col'>
         <Outlet />
         <Toaster richColors position='top-right' />
       </main>
