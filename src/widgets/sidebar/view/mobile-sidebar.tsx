@@ -1,12 +1,14 @@
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { useSession } from '@/shared/model/use-session';
+import { AlertDialog } from '@/shared/ui/kit/alert-dialog';
 import { Dialog } from '@/shared/ui/kit/dialog';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/shared/ui/kit/popover';
+import { LogoutAlert } from '@/shared/ui/logout-alert';
 import { sidebarItems } from '@/shared/utils/consts/consts';
 import { GameRules } from '@/widgets/game-rules';
 import { LogOut, Menu } from 'lucide-react';
@@ -15,7 +17,9 @@ import { useState } from 'react';
 export function MobileSidebar() {
   const [open, setOpen] = useState(false);
   const [isGameRulesOpen, setIsGameRulesOpen] = useState(false);
-  const { session, logout } = useSession();
+  const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+
+  const session = useSession((state) => state.session);
 
   return (
     <>
@@ -68,7 +72,7 @@ export function MobileSidebar() {
             ))}
 
             <div
-              onClick={logout}
+              onClick={() => setIsExitDialogOpen(true)}
               className='w-full py-3! px-6! rounded text-base font-medium flex items-center gap-2 text-white cursor-pointer hover:bg-[#494949] mt-5!'
             >
               <LogOut />
@@ -78,10 +82,13 @@ export function MobileSidebar() {
         </PopoverContent>
       </Popover>
 
-      {/* Диалог "Правила игры" */}
       <Dialog open={isGameRulesOpen} onOpenChange={setIsGameRulesOpen}>
         <GameRules />
       </Dialog>
+
+      <AlertDialog open={isExitDialogOpen} onOpenChange={setIsExitDialogOpen}>
+        <LogoutAlert />
+      </AlertDialog>
     </>
   );
 }

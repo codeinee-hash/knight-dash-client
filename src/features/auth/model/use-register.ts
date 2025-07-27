@@ -19,11 +19,12 @@ export function useRegister() {
     onSuccess(data) {
       login(data.access_token);
       navigate(ROUTES.HOME);
+      toast.success('Добро пожаловать в Knight Dash!');
     },
     onError(error) {
       if (error instanceof AxiosError) {
         toast.error(
-          error.response?.data?.errors[0] || 'Ошибка при регистрации'
+          error.response?.data?.message || 'Ошибка при регистрации'
         );
       }
     },

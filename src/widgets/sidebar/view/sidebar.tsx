@@ -1,17 +1,24 @@
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { useSession } from '@/shared/model/use-session';
+import { AlertDialog } from '@/shared/ui/kit/alert-dialog';
 import { Dialog } from '@/shared/ui/kit/dialog';
 import { Sheet, SheetContent, SheetHeader } from '@/shared/ui/kit/sheet';
-import { sidebarItems } from '@/shared/utils/consts/consts';
+import { LogoutAlert } from '@/shared/ui/logout-alert';
+import { ROUTES, sidebarItems } from '@/shared/utils/consts/consts';
 import { GameRules } from '@/widgets/game-rules';
 import { ArrowRight, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 export function Sidebar() {
   const [open, setOpen] = useState(false);
   const [isGameRulesOpen, setIsGameRulesOpen] = useState(false);
-  const { session } = useSession();
+  const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+
+  const session = useSession((state) => state.session);
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -29,7 +36,7 @@ export function Sidebar() {
           side='left'
           className='w-[322px] h-full bg-[#393939] border-none! outline-none! px-5! pt-7! text-white gap-5 pb-[100px]!'
         >
-          <div className='flex-grow flex flex-col gap-5 pb-[100px]! overflow-y-auto'>
+          <div className='flex-grow flex flex-col gap-5 pb-[100px]!'>
             <SheetHeader>
               <div className='flex justify-center'>
                 <img src={geeksLogo} alt='geeks' width={189} height={37} />
@@ -56,6 +63,8 @@ export function Sidebar() {
                   onClick={() => {
                     if (item.lable === 'Правила игры') {
                       setIsGameRulesOpen(true);
+                    } else if (item.lable === 'Таблица лидеров') {
+                      navigate(ROUTES.LEADERBOARDS)
                     }
                   }}
                 >
@@ -71,7 +80,10 @@ export function Sidebar() {
             </div>
           </div>
 
-          <div className='w-full py-3! px-6! rounded text-base font-medium flex items-center gap-2 text-white cursor-pointer hover:bg-[#494949]'>
+          <div
+            onClick={() => setIsExitDialogOpen(true)}
+            className='w-full py-3! px-6! rounded text-base font-medium flex items-center gap-2 text-white cursor-pointer hover:bg-[#494949]'
+          >
             <LogOut />
             Выйти
           </div>
@@ -81,6 +93,10 @@ export function Sidebar() {
       <Dialog open={isGameRulesOpen} onOpenChange={setIsGameRulesOpen}>
         <GameRules />
       </Dialog>
+
+      <AlertDialog open={isExitDialogOpen} onOpenChange={setIsExitDialogOpen}>
+        <LogoutAlert />
+      </AlertDialog>
     </>
   );
 }
