@@ -25,7 +25,7 @@ export function Sidebar() {
       {!open && (
         <div
           onClick={() => setOpen(true)}
-          className='max-sm:hidden fixed left-0 z-40 h-screen w-[60px] cursor-pointer rounded-r-md bg-[#393939] text-[#F5D91F] flex items-center justify-center shadow-lg'
+          className='max-md:hidden fixed left-0 z-40 h-screen w-[60px] cursor-pointer rounded-r-md bg-[#393939] text-[#F5D91F] flex items-center justify-center shadow-lg'
         >
           <ChevronRight />
         </div>
@@ -65,6 +65,10 @@ export function Sidebar() {
                       setIsGameRulesOpen(true);
                     } else if (item.lable === 'Таблица лидеров') {
                       navigate(ROUTES.LEADERBOARDS);
+                    } else if (item.lable === 'Режимы времени') {
+                      navigate(ROUTES.TIME_MODE);
+                    } else if (item.lable === 'Настройки') {
+                      navigate(ROUTES.SETTINGS);
                     }
 
                     setOpen(false);

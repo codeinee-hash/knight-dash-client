@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: ROUTES.INTRO,
-            lazy: () => import('@/pages/intro/intro.page'),
+            lazy: () => import('@/pages/intro/intro-page'),
           },
           {
             path: ROUTES.GAME_ROOM,
@@ -22,6 +22,14 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.LEADERBOARDS,
             lazy: () => import('@/pages/leaderboards/leaderboards'),
+          },
+          {
+            path: ROUTES.TIME_MODE,
+            lazy: () => import('@/pages/time-mode/time-mode'),
+          },
+          {
+            path: ROUTES.SETTINGS,
+            lazy: () => import('@/pages/settings/settings'),
           },
         ],
       },

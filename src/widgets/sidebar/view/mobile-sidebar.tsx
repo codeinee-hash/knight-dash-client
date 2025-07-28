@@ -28,7 +28,7 @@ export function MobileSidebar() {
     <>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <div className='fixed top-4 right-4 z-50 hidden max-sm:block'>
+          <div className='fixed top-4 right-4 z-50 hidden max-md:block'>
             <button
               onClick={() => setOpen(!open)}
               className='text-yellow-400 bg-[#212121] p-2! rounded-md shadow'
@@ -68,6 +68,10 @@ export function MobileSidebar() {
                     setIsGameRulesOpen(true);
                   } else if (item.lable === 'Таблица лидеров') {
                     navigate(ROUTES.LEADERBOARDS);
+                  } else if (item.lable === 'Режимы времени') {
+                    navigate(ROUTES.TIME_MODE);
+                  } else if (item.lable === 'Настройки') {
+                    navigate(ROUTES.SETTINGS);
                   }
 
                   setOpen(false);
