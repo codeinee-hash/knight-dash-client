@@ -5,6 +5,8 @@ import sidebarItems1 from '@/shared/assets/images/Pictograms.svg';
 import sidebarItems6 from '@/shared/assets/images/Settings.svg';
 import sidebarItems3 from '@/shared/assets/images/Time-mode.svg';
 
+export const baseURL = import.meta.env.VITE_API_URL;
+
 export const ROUTES = {
   HOME: '/',
   REGISTER: '/sign-up',
@@ -12,10 +14,10 @@ export const ROUTES = {
   GAME_ROOM: '/game',
   INTRO: '/intro',
   LEADERBOARDS: '/leaderboards',
+  TIME_MODE: '/time-mode',
+  SETTINGS: '/settings',
   NOT_FOUND: '*',
 } as const;
-
-export const baseURL = import.meta.env.VITE_API_URL;
 
 export const CoinNaminals = {
   COIN150: 150,
@@ -43,6 +45,7 @@ export const FigureNames = {
 export const Tokens = {
   ACCESS: 'token_auth',
 };
+
 export const CurrentPlayer = 'CURRENT_PLAYER';
 
 export const GAME_TIMER = 60;
@@ -72,7 +75,7 @@ export const rules = [
 export const sidebarItems = [
   { icon: sidebarItems1, lable: 'Один игрок', href: '#' },
   { icon: sidebarItems2, lable: 'Два игрока', href: '#' },
-  { icon: sidebarItems3, lable: 'Режим времени', href: '#' },
+  { icon: sidebarItems3, lable: 'Режимы времени', href: '#' },
   { icon: sidebarItems4, lable: 'Таблица лидеров', href: '#' },
   { icon: sidebarItems5, lable: 'Правила игры', href: '#' },
   { icon: sidebarItems6, lable: 'Настройки', href: '#' },

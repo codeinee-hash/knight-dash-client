@@ -115,7 +115,7 @@ export function LeaderBoard({
             <div className='mt-6! flex justify-center'>
               <button
                 onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_PAGE)}
-                className='text-[#F5D91F] transition-all outline-none border-none bg-none flex items-center gap-2 font-medium max-sm:text-[14px]'
+                className='text-[#F5D91F] transition-all outline-none border-none bg-none flex items-center gap-2 font-medium max-sm:text-[14px] cursor-pointer'
               >
                 Смотреть больше <ChevronRight />
               </button>
