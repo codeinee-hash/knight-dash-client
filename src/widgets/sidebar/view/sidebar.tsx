@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetHeader } from '@/shared/ui/kit/sheet';
 import { LogoutAlert } from '@/shared/ui/logout-alert';
 import { ROUTES, sidebarItems } from '@/shared/utils/consts/consts';
 import { GameRules } from '@/widgets/game-rules';
-import { ArrowRight, LogOut } from 'lucide-react';
+import { ChevronRight, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export function Sidebar() {
           onClick={() => setOpen(true)}
           className='max-sm:hidden fixed left-0 z-40 h-screen w-[60px] cursor-pointer rounded-r-md bg-[#393939] text-[#F5D91F] flex items-center justify-center shadow-lg'
         >
-          <ArrowRight />
+          <ChevronRight />
         </div>
       )}
 

@@ -1,3 +1,3 @@
-export { LeaderBoard } from './view/leader-board';
+export { LeaderBoard } from './view/leaderboard';
 
 export { useLeaderBoard } from './model/useLeaderBoard';

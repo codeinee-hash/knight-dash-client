@@ -1,37 +1,17 @@
-import { create } from 'zustand';
-import { $authApi } from '../../../shared/api/axios';
-import { GAME_MODE } from '../../../shared/utils/consts/consts';
-import type { LeaderBoardDto } from '../../../shared/utils/types';
+import { $authApi } from '@/shared/api/axios';
+import type { LeaderBoardDto } from '@/shared/utils/types';
+import { useQuery } from '@tanstack/react-query';
 
-interface State {
-  data: LeaderBoardDto[];
-  isLoading: boolean;
-  getLeaderboards: (filterMode: GAME_MODE) => void;
+export function useLeaderBoard() {
+  return useQuery({
+    queryKey: ['leaderboard'],
 
-  filterMode: GAME_MODE;
-  setFilterMode: (mode: GAME_MODE) => void;
+    queryFn: async () => {
+      const { data } = await $authApi.get<{
+        status: string;
+        data: LeaderBoardDto[];
+      }>('score/top-players');
+      return data.data;
+    },
+  });
 }
-export const useLeaderBoard = create<State>((set) => ({
-  data: [] as LeaderBoardDto[],
-  isLoading: false,
-
-  filterMode: GAME_MODE.RAPID,
-
-  setFilterMode: (filterMode) => set({ filterMode }),
-
-  getLeaderboards: async (mode) => {
-    try {
-      set({ isLoading: true });
-      const { data } = await $authApi.get('score/top-players', {
-        params: {
-          mode,
-        },
-      });
-      set({ data: data.data });
-    } catch (e) {
-      return Promise.reject(e);
-    } finally {
-      set({ isLoading: false });
-    }
-  },
-}));

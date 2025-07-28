@@ -69,6 +69,8 @@ export function MobileSidebar() {
                   } else if (item.lable === 'Таблица лидеров') {
                     navigate(ROUTES.LEADERBOARDS);
                   }
+
+                  setOpen(false);
                 }}
               >
                 <img src={item.icon} alt={item.lable} width={26} height={26} />

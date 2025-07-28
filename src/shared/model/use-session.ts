@@ -70,7 +70,7 @@ export const useSession = create<SessionStore>((set, get) => {
               refreshTokenPromise = null;
             });
         }
-        
+
         const newToken = await refreshTokenPromise;
         return newToken;
       }
