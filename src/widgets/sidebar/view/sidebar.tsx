@@ -9,7 +9,7 @@ import { ROUTES, sidebarItems } from '@/shared/utils/consts/consts';
 import { GameRules } from '@/widgets/game-rules';
 import { ArrowRight, LogOut } from 'lucide-react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ export function Sidebar() {
 
   const session = useSession((state) => state.session);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
@@ -64,8 +64,10 @@ export function Sidebar() {
                     if (item.lable === 'Правила игры') {
                       setIsGameRulesOpen(true);
                     } else if (item.lable === 'Таблица лидеров') {
-                      navigate(ROUTES.LEADERBOARDS)
+                      navigate(ROUTES.LEADERBOARDS);
                     }
+
+                    setOpen(false);
                   }}
                 >
                   <img

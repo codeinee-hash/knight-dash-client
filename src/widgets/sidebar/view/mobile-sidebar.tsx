@@ -9,10 +9,11 @@ import {
   PopoverTrigger,
 } from '@/shared/ui/kit/popover';
 import { LogoutAlert } from '@/shared/ui/logout-alert';
-import { sidebarItems } from '@/shared/utils/consts/consts';
+import { ROUTES, sidebarItems } from '@/shared/utils/consts/consts';
 import { GameRules } from '@/widgets/game-rules';
 import { LogOut, Menu } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function MobileSidebar() {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,8 @@ export function MobileSidebar() {
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
 
   const session = useSession((state) => state.session);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -63,6 +66,8 @@ export function MobileSidebar() {
                 onClick={() => {
                   if (item.lable === 'Правила игры') {
                     setIsGameRulesOpen(true);
+                  } else if (item.lable === 'Таблица лидеров') {
+                    navigate(ROUTES.LEADERBOARDS);
                   }
                 }}
               >
