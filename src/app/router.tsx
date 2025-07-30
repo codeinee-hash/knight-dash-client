@@ -16,8 +16,20 @@ export const router = createBrowserRouter([
             lazy: () => import('@/pages/intro/intro-page'),
           },
           {
-            path: ROUTES.GAME_ROOM,
-            lazy: () => import('@/pages/game-room/game-room'),
+            path: ROUTES.SOLO_GAME,
+            lazy: () => import('@/pages/solo-game/main-solo-game'),
+          },
+          {
+            path: ROUTES.SOLO_GAME_ROOM,
+            lazy: () => import('@/pages/solo-game/solo-game-room'),
+          },
+          {
+            path: ROUTES.GAME_DUEL,
+            lazy: () => import('@/pages/duel-game/main-duel-game'),
+          },
+          {
+            path: ROUTES.DUEL_GAME_ROOM,
+            lazy: () => import('@/pages/duel-game/duel-game-room'),
           },
           {
             path: ROUTES.LEADERBOARDS,
@@ -43,7 +55,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTES.HOME,
-        loader: () => redirect(ROUTES.INTRO),
+        loader: () => redirect(ROUTES.SOLO_GAME),
       },
     ],
   },

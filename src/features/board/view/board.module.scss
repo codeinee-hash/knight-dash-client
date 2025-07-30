@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 15px;
+
   .userName {
     align-self: flex-start;
     display: inline-block;
@@ -22,17 +23,26 @@
     height: calc(60px * 8);
     display: flex;
     flex-wrap: wrap;
+
     @media screen and (max-width: 510px) {
       width: calc(44px * 8);
       height: calc(44px * 8);
     }
+
+    @media screen and (max-width: 390px) {
+      width: calc(36px * 8);
+      height: calc(36px * 8);
+    }
   }
+
   @media screen and (max-width: 510px) {
     position: relative;
     top: -5px;
+
     .userName {
       font-size: 16px;
       margin-left: 10%;
+
       @media screen and (max-width: 420px) {
         margin: 6%;
       }

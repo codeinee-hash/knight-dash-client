@@ -1,12 +1,14 @@
 .lost {
   padding: 20px;
   background-color: #393939;
-  max-height: 480px;
+  // max-height: 480px;
   border-radius: 4px;
+  margin-left: auto;
 
   .title {
     color: #ffffff;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+
     @media screen and (max-width: 510px) {
       display: none;
     }
@@ -21,6 +23,7 @@
   color: #ffffff;
   padding-bottom: 20px;
   border-bottom: 1px solid #666666;
+
   @media screen and (max-width: 510px) {
     width: 100vw;
   }

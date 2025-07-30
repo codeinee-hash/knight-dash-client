@@ -72,6 +72,10 @@ export function MobileSidebar() {
                     navigate(ROUTES.TIME_MODE);
                   } else if (item.lable === 'Настройки') {
                     navigate(ROUTES.SETTINGS);
+                  } else if (item.lable === 'Один игрок') {
+                    navigate(ROUTES.GAME_ROOM);
+                  } else if (item.lable === 'Два игрока') {
+                    navigate(ROUTES.GAME_DUEL);
                   }
 
                   setOpen(false);

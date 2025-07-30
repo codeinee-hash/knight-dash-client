@@ -7,10 +7,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/shared/ui/kit/alert-dialog';
+import { useNavigate } from 'react-router-dom';
 import { useSession } from '../model/use-session';
+import { ROUTES } from '../utils/consts/consts';
 
 export function LogoutAlert() {
   const logout = useSession((state) => state.logout);
+
+  const navigate = useNavigate();
 
   return (
     <AlertDialogContent className='p-7! bg-[#393939] border-none text-white'>
@@ -26,7 +30,13 @@ export function LogoutAlert() {
         <AlertDialogCancel className='text-[#393939] px-3!'>
           Отмена
         </AlertDialogCancel>
-        <AlertDialogAction onClick={logout} className='text-[#F5D91F] px-3!'>
+        <AlertDialogAction
+          onClick={() => {
+            logout();
+            navigate(ROUTES.LOGIN);
+          }}
+          className='text-[#F5D91F] px-3!'
+        >
           Выйти
         </AlertDialogAction>
       </AlertDialogFooter>
