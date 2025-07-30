@@ -3,13 +3,11 @@ import { BoardComponent } from '@/features/board';
 import { Board } from '@/features/board/model/board';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { useSession } from '@/shared/model/use-session';
-import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { PageLayout } from '@/widgets/page-layout';
 import { useEffect, useState, type FC } from 'react';
 
 const SoloGameRoom: FC = () => {
   const [board, setBoard] = useState(new Board());
-  const isDesktop = useMediaQuery('(min-width: 1201px)');
   const session = useSession((state) => state.session);
 
   useEffect(() => {
@@ -19,7 +17,6 @@ const SoloGameRoom: FC = () => {
   function init() {
     const newBoard = new Board();
     newBoard.initCells();
-    newBoard.addFigures();
     setBoard(newBoard);
   }
 
@@ -35,10 +32,10 @@ const SoloGameRoom: FC = () => {
   return (
     <PageLayout>
       <div className='w-full'>
-        <div className='flex pt-8! relative justify-center'>
-          <div className='absolute left-1/2 -translate-x-1/2'>
+        <div className='flex pt-8! max-md:pt-[18px]! relative justify-center max-[1200px]:flex-col max-[1200px]:items-center'>
+          <div className='min-[1201px]:absolute min-[1201px]:left-1/2 min-[1201px]:-translate-x-1/2'>
             <div className='rounded bg-[#212121] px-3! py-2! inline-flex items-center gap-2.5 mb-6! text-white font-medium'>
-              <div className='w-[28px] h-[28px] bg-white rounded-full border border-[#F5D91F] py-[5px]! pl-[6.75px]! pr-[7.75px]! max-md:hidden'>
+              <div className='w-[28px] h-[28px] bg-white rounded-full border border-[#F5D91F] py-[5px]! pl-[6.75px]! pr-[7.75px]!'>
                 <img
                   src={playerLogo}
                   alt='player logo'
@@ -51,15 +48,8 @@ const SoloGameRoom: FC = () => {
             <BoardComponent board={board} setBoard={setBoard} />
           </div>
 
-          {isDesktop && (
-            <ScoreCoins
-              timerKey={0}
-              coins={scoreBoardCoins}
-              isGameRoom={false}
-            />
-          )}
+          <ScoreCoins timerKey={0} coins={scoreBoardCoins} isGameRoom={false} />
         </div>
-        {!isDesktop && <div className='text-center'>tab bar</div>}
       </div>
     </PageLayout>
   );

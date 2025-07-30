@@ -5,6 +5,23 @@
   border-radius: 4px;
   margin-left: auto;
 
+  @media screen and (max-width: 1200px) {
+    margin-left: 0;
+    max-width: 480px;
+    width: 100%;
+    margin: 20px 0 50px 0;
+  }
+
+  @media screen and (max-width: 510px) {
+    max-width: 352px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 390px) {
+    max-width: 288px;
+    width: 100%;
+  }
+
   .title {
     color: #ffffff;
     margin-bottom: 20px;
@@ -16,7 +33,6 @@
 }
 
 .lostList {
-  width: 280px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -24,8 +40,8 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #666666;
 
-  @media screen and (max-width: 510px) {
-    width: 100vw;
+  @media screen and (min-width: 1201px) {
+    width: 280px;
   }
 }
 

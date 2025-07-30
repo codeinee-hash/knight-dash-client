@@ -23,9 +23,7 @@ export function useRegister() {
     },
     onError(error) {
       if (error instanceof AxiosError) {
-        toast.error(
-          error.response?.data?.message || 'Ошибка при регистрации'
-        );
+        toast.error(error.response?.data?.message || 'Ошибка при регистрации');
       }
     },
   });

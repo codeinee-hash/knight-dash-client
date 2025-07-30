@@ -32,8 +32,8 @@ export function LogoutAlert() {
         </AlertDialogCancel>
         <AlertDialogAction
           onClick={() => {
-            logout();
             navigate(ROUTES.LOGIN);
+            logout();
           }}
           className='text-[#F5D91F] px-3!'
         >

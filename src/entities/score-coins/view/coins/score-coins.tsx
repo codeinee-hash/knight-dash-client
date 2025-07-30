@@ -4,11 +4,14 @@ import logo250 from '@/shared/assets/images/geekcoin 250.svg';
 import logo300 from '@/shared/assets/images/geekcoin 300.svg';
 import logo350 from '@/shared/assets/images/geekcoin 350.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
+import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/kit/button';
 import { ScoreItem } from '@/shared/ui/score-item/score-item';
+import { ROUTES } from '@/shared/utils/consts/consts';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import type { IScoreCoins } from '@/shared/utils/types';
 import { useState, type FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GameModeSelect } from '../game-mode-select';
 import { Timer } from '../timer/timer';
 import classes from './score-coins.module.scss';
@@ -22,6 +25,8 @@ export const ScoreCoins: FC<{
 
   const isDesktop = useMediaQuery('(min-width: 510px)');
 
+  const navigate = useNavigate();
+
   return (
     <div className={classes.lost}>
       {isDesktop && <Timer timerKey={timerKey} />}
@@ -29,13 +34,23 @@ export const ScoreCoins: FC<{
       {!isGameRoom && (
         <div className='mt-5! mb-8!'>
           <GameModeSelect value={filter} onChange={setFilter} />
-          <Button className='w-full h-[44px] rounded-[8px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'>
+          <Button
+            onClick={() => navigate(ROUTES.SOLO_GAME_ROOM)}
+            className='w-full h-[44px] rounded-[8px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
+          >
             Начать игру
           </Button>
         </div>
       )}
 
-      <h3 className={classes.title}>{'ТАБЛО РЕЗУЛЬТАТОВ:'}</h3>
+      <h3
+        className={cn(
+          'text-white mb-5! max-[510px]:hidden',
+          isGameRoom && 'mt-5!'
+        )}
+      >
+        {'РЕЗУЛЬТАТЫ:'}
+      </h3>
       <div className={classes.lostList}>
         <ScoreItem
           variant='single'

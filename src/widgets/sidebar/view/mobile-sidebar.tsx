@@ -73,7 +73,7 @@ export function MobileSidebar() {
                   } else if (item.lable === 'Настройки') {
                     navigate(ROUTES.SETTINGS);
                   } else if (item.lable === 'Один игрок') {
-                    navigate(ROUTES.GAME_ROOM);
+                    navigate(ROUTES.SOLO_GAME);
                   } else if (item.lable === 'Два игрока') {
                     navigate(ROUTES.GAME_DUEL);
                   }

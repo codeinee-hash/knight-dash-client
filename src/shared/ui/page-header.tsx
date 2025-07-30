@@ -1,10 +1,16 @@
 export function PageHeader({ title, img }: { title: string; img: string }) {
   return (
-    <div className='flex items-center gap-5 mb-8! max-sm:mb-3!'>
+    <div className='flex items-center gap-5 max-sm:gap-3 mb-8! max-sm:mb-3!'>
       <div>
-        <img src={img} alt={title} className='w-20 h-20' />
+        <img
+          src={img}
+          alt={title}
+          className='w-20 h-20 max-sm:w-14 max-sm:h-14'
+        />
       </div>
-      <h2 className='text-white text-[28px] font-bold max-sm:text-[20px]'>{title}</h2>
+      <h2 className='text-white text-[28px] font-bold max-sm:text-[20px]'>
+        {title}
+      </h2>
     </div>
   );
 }

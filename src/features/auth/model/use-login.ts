@@ -19,7 +19,6 @@ export function useLogin() {
     onSuccess(data) {
       loginFn(data.access_token);
       navigate(ROUTES.HOME);
-      toast.success('Добро пожаловать в Knight Dash!');
     },
     onError(error) {
       if (error instanceof AxiosError) {

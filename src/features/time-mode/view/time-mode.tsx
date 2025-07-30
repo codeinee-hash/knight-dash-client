@@ -14,7 +14,7 @@ export function TimeModeItem({
       </div>
       <p className='text-[24px] font-medium mb-2!'>{mode}</p>
       <p className='text-base font-bold mb-5!'>{timer} секунд</p>
-      <button className='w-full py-3! text-white text-base font-medium rounded border border-[#F5D91F] cursor-pointer hover:bg-[#F5D91F] transition-colors duration-200'>
+      <button className='w-full active:translate-y-[1px] py-3! text-white text-base font-medium rounded border border-[#F5D91F] cursor-pointer hover:bg-[#F5D91F] transition-colors duration-200'>
         Играть
       </button>
     </div>
