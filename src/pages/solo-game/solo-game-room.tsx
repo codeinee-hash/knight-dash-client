@@ -2,9 +2,16 @@ import { ScoreCoins } from '@/entities/score-coins';
 import { Timer } from '@/entities/score-coins/view/timer/timer';
 import { BoardComponent } from '@/features/board';
 import { Board } from '@/features/board/model/board';
+import logo150 from '@/shared/assets/images/geekcoin 150.svg';
+import logo200 from '@/shared/assets/images/geekcoin 200.svg';
+import logo250 from '@/shared/assets/images/geekcoin 250.svg';
+import logo300 from '@/shared/assets/images/geekcoin 300.svg';
+import logo350 from '@/shared/assets/images/geekcoin 350.svg';
+import totalGeekCoins from '@/shared/assets/images/total-coins.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { useSession } from '@/shared/model/use-session';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/kit/tabs';
+import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { PageLayout } from '@/widgets/page-layout';
@@ -84,34 +91,77 @@ const SoloGameRoom: FC = () => {
 
           {!isDesktop && (
             <div className='max-w-[480px] max-[510px]:max-w-[352px] max-[390px]:max-w-[288px] w-full mt-6!'>
-              <Tabs defaultValue='account' className='w-full'>
+              <Tabs defaultValue='scoreboard' className='w-full'>
                 <TabsList className='flex gap-1'>
                   <TabsTrigger
-                    value='account'
+                    value='scoreboard'
                     className='bg-[#494949] p-2.5! text-white text-base font-medium'
                   >
                     Результаты
                   </TabsTrigger>
                   <TabsTrigger
-                    value='password'
+                    value='lederboard'
                     className='bg-[#494949] p-2.5! text-white text-base font-medium'
                   >
                     Лидеры
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent
-                  value='account'
-                  className='bg-[#393939] p-2.5! text-white'
+                  value='scoreboard'
+                  className='bg-[#393939] p-2.5! text-white mb-8! rounded-lg'
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ipsam, recusandae!
+                  <div className='w-full flex flex-col gap-1 text-white pb-[20px]! pt-3! px-2! border-b border-b-[#666666]'>
+                    <ScoreItem
+                      variant='single'
+                      nominal={150}
+                      coins={board.lostCoint150}
+                      logo={logo150}
+                    />
+                    <ScoreItem
+                      variant='single'
+                      nominal={200}
+                      coins={board.lostCoint200}
+                      logo={logo200}
+                    />
+                    <ScoreItem
+                      variant='single'
+                      nominal={250}
+                      coins={board.lostCoint250}
+                      logo={logo250}
+                    />
+                    <ScoreItem
+                      variant='single'
+                      nominal={300}
+                      coins={board.lostCoint300}
+                      logo={logo300}
+                    />
+                    <ScoreItem
+                      variant='single'
+                      nominal={350}
+                      coins={board.lostCoint350}
+                      logo={logo350}
+                    />
+                  </div>
+
+                  <div className='text-[15px] pt-[30px]! pb-3! px-2!'>
+                    <h4 className='text-base mb-[15px]! text-white font-medium'>
+                      Общий:
+                    </h4>
+                    <ScoreItem
+                      variant='total'
+                      logo={totalGeekCoins}
+                      coins={board.lostCoint350}
+                      nominal={350}
+                      totalScore={board.totalScore}
+                    />
+                  </div>
                 </TabsContent>
                 <TabsContent
-                  value='password'
+                  value='lederboard'
                   className='bg-[#393939] p-2.5! text-white'
                 >
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic,
-                  ab?
+                  ab? 12
                 </TabsContent>
               </Tabs>
             </div>

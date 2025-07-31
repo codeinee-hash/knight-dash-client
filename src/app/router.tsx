@@ -12,10 +12,6 @@ export const router = createBrowserRouter([
         element: <AuthorizationGuard />,
         children: [
           {
-            path: ROUTES.INTRO,
-            lazy: () => import('@/pages/intro/intro-page'),
-          },
-          {
             path: ROUTES.SOLO_GAME,
             lazy: () => import('@/pages/solo-game/main-solo-game'),
           },
