@@ -112,12 +112,12 @@ export function MobileSidebar() {
       <Dialog open={isDuelDevModal} onOpenChange={setIsDuelDevModal}>
         <DialogContent className='rounded-[12px] bg-[#393939] p-7! outline-none! border-none! text-white'>
           <DialogHeader>
-            <DialogTitle className='text-[24px] font-bold text-center leading-8'>
-              Режим «2 игрока» пока в разработке
+            <DialogTitle className='text-[24px] font-bold text-center'>
+              Режим недоступен
             </DialogTitle>
           </DialogHeader>
-          <div className='flex items-center gap-8 mt-2!'>
-            Разработчики потеют над этим днём и ночью 💦 Скоро всё будет!
+          <div className='flex items-center gap-8 mt-2! text-center'>
+            Функция игры в формате 2 игроков пока находится в разработке.
           </div>
           <Button
             type='button'

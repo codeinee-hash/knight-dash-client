@@ -12,7 +12,7 @@ export const ROUTES = {
   REGISTER: '/sign-up',
   LOGIN: '/sign-in',
   SOLO_GAME: '/solo-game',
-  SOLO_GAME_ROOM: '/solo-game/dasdas',
+  SOLO_GAME_ROOM: '/solo-game/:gameId',
   GAME_DUEL: '/duel',
   DUEL_GAME_ROOM: '/duel/sdasd',
   INTRO: '/intro',

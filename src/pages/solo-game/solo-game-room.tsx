@@ -15,9 +15,9 @@ import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { PageLayout } from '@/widgets/page-layout';
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useState } from 'react';
 
-const SoloGameRoom: FC = () => {
+export function SoloGameRoom() {
   const [board, setBoard] = useState(new Board());
   const [timerKey, setTimerKey] = useState(0);
   const isGameOver = useGame((state) => state.isGameOver);
@@ -170,6 +170,6 @@ const SoloGameRoom: FC = () => {
       </div>
     </PageLayout>
   );
-};
+}
 
-export const Component = SoloGameRoom;
+// export const Component = SoloGameRoom;

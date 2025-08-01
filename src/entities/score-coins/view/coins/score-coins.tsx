@@ -7,7 +7,6 @@ import totalGeekCoins from '@/shared/assets/images/total-coins.png';
 import { cn } from '@/shared/lib/utils';
 import {
   AlertDialog,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -19,8 +18,8 @@ import { ProgresLoader } from '@/shared/ui/progress-loader/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import type { IScoreCoins } from '@/shared/utils/types';
-import { useState, type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, type FC } from 'react';
+import { useCreateSoloGame } from '../../model/use-create-session';
 import { GameModeSelect } from '../game-mode-select';
 import { Timer } from '../timer/timer';
 import classes from './score-coins.module.scss';
@@ -30,12 +29,16 @@ export const ScoreCoins: FC<{
   timerKey: number;
   isGameRoom: boolean;
 }> = ({ coins, timerKey, isGameRoom }) => {
-  const [filter, setFilter] = useState('bullet');
-  const [isCreatingGame, setIsCreatingGame] = useState(false);
+  const [filter, setFilter] = useState('15');
+  const [isCreatingGame, setIsCreatingGame] = useState(true);
 
   const isDesktop = useMediaQuery('(min-width: 510px)');
 
-  const navigate = useNavigate();
+  const createGame = useCreateSoloGame();
+
+  useEffect(() => {
+    setIsCreatingGame(createGame.isPending);
+  }, [createGame.isPending]);
 
   return (
     <>
@@ -46,7 +49,7 @@ export const ScoreCoins: FC<{
           <div className='mt-5! mb-8!'>
             <GameModeSelect value={filter} onChange={setFilter} />
             <Button
-              onClick={() => setIsCreatingGame(true)}
+              onClick={() => createGame.create(Number(filter))}
               className='w-full h-[44px] rounded-[8px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
             >
               Начать игру
@@ -109,7 +112,9 @@ export const ScoreCoins: FC<{
       <AlertDialog open={isCreatingGame} onOpenChange={setIsCreatingGame}>
         <AlertDialogContent className='p-7! bg-[#393939] border-none text-white'>
           <AlertDialogHeader>
-            <AlertDialogTitle className='text-center'>Создание игровой сессии</AlertDialogTitle>
+            <AlertDialogTitle className='text-center'>
+              Создание игровой сессии
+            </AlertDialogTitle>
             <AlertDialogDescription className='text-white/80 flex flex-col items-center gap-6'>
               Подключаем вас к комнате.
               <div className='self-center'>
@@ -118,9 +123,16 @@ export const ScoreCoins: FC<{
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className='text-[#393939] px-3! mt-2!'>
+            <Button
+              variant='outline'
+              onClick={() => {
+                createGame.cancel();
+                setIsCreatingGame(false);
+              }}
+              className='text-black text-base font-medium mt-3!'
+            >
               Отмена
-            </AlertDialogCancel>
+            </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
