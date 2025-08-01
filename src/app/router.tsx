@@ -19,14 +19,14 @@ export const router = createBrowserRouter([
             path: ROUTES.SOLO_GAME_ROOM,
             lazy: () => import('@/pages/solo-game/solo-game-room'),
           },
-          {
-            path: ROUTES.GAME_DUEL,
-            lazy: () => import('@/pages/duel-game/main-duel-game'),
-          },
-          {
-            path: ROUTES.DUEL_GAME_ROOM,
-            lazy: () => import('@/pages/duel-game/duel-game-room'),
-          },
+          // {
+          //   path: ROUTES.GAME_DUEL,
+          //   lazy: () => import('@/pages/duel-game/main-duel-game'),
+          // },
+          // {
+          //   path: ROUTES.DUEL_GAME_ROOM,
+          //   lazy: () => import('@/pages/duel-game/duel-game-room'),
+          // },
           {
             path: ROUTES.LEADERBOARDS,
             lazy: () => import('@/pages/leaderboards/leaderboards'),

@@ -1,7 +1,7 @@
+import { $authApi } from '@/shared/api/axios';
+import type { GAME_MODE } from '@/shared/utils/consts/consts';
+import type { LeaderBoardDto } from '@/shared/utils/types';
 import { create } from 'zustand';
-import { $authApi } from '../../../shared/api/axios';
-import type { LeaderBoardDto } from '../../../shared/utils/types';
-import type { GAME_MODE } from '../../../shared/utils/consts/consts'
 
 interface IResponse {
   message: string;
@@ -18,10 +18,13 @@ export const useSendScore = create<IResponse>((set) => ({
   fetchScore: async (id: string, score: number, mode) => {
     try {
       set({ isLoading: true });
-      const response = await $authApi.post<IResponse>(`score/update-score?mode=${mode}`, {
-        id,
-        score,
-      });
+      const response = await $authApi.post<IResponse>(
+        `score/update-score?mode=${mode}`,
+        {
+          id,
+          score,
+        }
+      );
       set({
         data: response.data.data,
         message: response.data.message,

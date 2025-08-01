@@ -1,9 +1,9 @@
-import type { Colors } from '../../../shared/utils/consts/consts'
+import type { Colors } from '@/shared/utils/consts/consts';
 
 export class Player {
-	color: Colors
+  color: Colors;
 
-	constructor(color: Colors) {
-		this.color = color
-	}
+  constructor(color: Colors) {
+    this.color = color;
+  }
 }

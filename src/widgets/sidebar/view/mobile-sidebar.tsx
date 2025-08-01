@@ -2,7 +2,13 @@ import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { useSession } from '@/shared/model/use-session';
 import { AlertDialog } from '@/shared/ui/kit/alert-dialog';
-import { Dialog } from '@/shared/ui/kit/dialog';
+import { Button } from '@/shared/ui/kit/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/ui/kit/dialog';
 import {
   Popover,
   PopoverContent,
@@ -19,6 +25,7 @@ export function MobileSidebar() {
   const [open, setOpen] = useState(false);
   const [isGameRulesOpen, setIsGameRulesOpen] = useState(false);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
+  const [isDuelDevModal, setIsDuelDevModal] = useState(false);
 
   const session = useSession((state) => state.session);
 
@@ -75,7 +82,8 @@ export function MobileSidebar() {
                   } else if (item.lable === 'Один игрок') {
                     navigate(ROUTES.SOLO_GAME);
                   } else if (item.lable === 'Два игрока') {
-                    navigate(ROUTES.GAME_DUEL);
+                    // navigate(ROUTES.GAME_DUEL);
+                    setIsDuelDevModal(true);
                   }
 
                   setOpen(false);
@@ -99,6 +107,26 @@ export function MobileSidebar() {
 
       <Dialog open={isGameRulesOpen} onOpenChange={setIsGameRulesOpen}>
         <GameRules />
+      </Dialog>
+
+      <Dialog open={isDuelDevModal} onOpenChange={setIsDuelDevModal}>
+        <DialogContent className='rounded-[12px] bg-[#393939] p-7! outline-none! border-none! text-white'>
+          <DialogHeader>
+            <DialogTitle className='text-[24px] font-bold text-center leading-8'>
+              Режим «2 игрока» пока в разработке
+            </DialogTitle>
+          </DialogHeader>
+          <div className='flex items-center gap-8 mt-2!'>
+            Разработчики потеют над этим днём и ночью 💦 Скоро всё будет!
+          </div>
+          <Button
+            type='button'
+            onClick={() => setIsDuelDevModal(false)}
+            className='w-full mt-2! h-[44px] cursor-pointer rounded-[10px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
+          >
+            Ок
+          </Button>
+        </DialogContent>
       </Dialog>
 
       <AlertDialog open={isExitDialogOpen} onOpenChange={setIsExitDialogOpen}>

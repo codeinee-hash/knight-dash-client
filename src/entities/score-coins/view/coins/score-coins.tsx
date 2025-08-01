@@ -15,6 +15,7 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui/kit/alert-dialog';
 import { Button } from '@/shared/ui/kit/button';
+import { ProgresLoader } from '@/shared/ui/progress-loader/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import type { IScoreCoins } from '@/shared/utils/types';
@@ -108,13 +109,16 @@ export const ScoreCoins: FC<{
       <AlertDialog open={isCreatingGame} onOpenChange={setIsCreatingGame}>
         <AlertDialogContent className='p-7! bg-[#393939] border-none text-white'>
           <AlertDialogHeader>
-            <AlertDialogTitle>Загрузка</AlertDialogTitle>
-            <AlertDialogDescription className='text-white/80'>
-              Происходит создание игровой комнаты, подождите ...
+            <AlertDialogTitle className='text-center'>Создание игровой сессии</AlertDialogTitle>
+            <AlertDialogDescription className='text-white/80 flex flex-col items-center gap-6'>
+              Подключаем вас к комнате.
+              <div className='self-center'>
+                <ProgresLoader />
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className='text-[#393939] px-3!'>
+            <AlertDialogCancel className='text-[#393939] px-3! mt-2!'>
               Отмена
             </AlertDialogCancel>
           </AlertDialogFooter>
