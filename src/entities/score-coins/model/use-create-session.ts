@@ -20,7 +20,9 @@ export function useCreateSoloGame() {
       return res.data;
     },
     onSuccess: (data) => {
-      navigate(ROUTES.SOLO_GAME_ROOM.replace(':gameId', data._id));
+      navigate(ROUTES.SOLO_GAME_ROOM.replace(':gameId', data._id), {
+        replace: true,
+      });
     },
     onError: (err) => {
       if (err.name === 'CanceledError') {

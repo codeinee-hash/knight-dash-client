@@ -8,10 +8,12 @@ import classes from './score-item.module.scss';
 export const ScoreItem: FC<{
   variant: 'single' | 'total';
   nominal: CoinNaminals;
-  coins: CoinNaminals[];
+  coinCount: number;
   logo: typeof typeLogo | null;
   totalScore?: number;
-}> = ({ variant, nominal, coins, logo, totalScore }) => {
+}> = ({ variant, nominal, coinCount, logo, totalScore }) => {
+  const coinValue = coinCount ? coinCount * nominal : 0;
+
   return (
     <div className={classes.scoreItem}>
       <div className={classes.label}>
@@ -31,7 +33,7 @@ export const ScoreItem: FC<{
           variant === 'total' && classes.totalValue
         )}
       >
-        {variant === 'single' ? coins.length * nominal : totalScore}
+        {variant === 'single' ? coinValue : totalScore}
       </p>
     </div>
   );

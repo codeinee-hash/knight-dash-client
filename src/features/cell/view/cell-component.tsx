@@ -1,16 +1,21 @@
-import clsx from 'clsx'
-import type { FC } from 'react'
-import type { Cell } from '../model/cell'
-import classes from './cell.module.scss'
+import clsx from 'clsx';
+import type { FC } from 'react';
+import { memo } from 'react';
+import type { Cell } from '../model/cell';
+import classes from './cell.module.scss';
 
 export const CellComponent: FC<{
-	cell: Cell
-	selected: boolean
-	onClick: (cell: Cell) => void
-}> = ({ cell, selected, onClick }) => {
-
-	return (
-		<div
+  cell: Cell;
+  selected: boolean;
+  available: boolean; // Новый пропс
+  onClick: (cell: Cell) => void;
+}> = memo(({ cell, selected, available, onClick }) => {
+  console.log(
+    `Rendering CellComponent (${cell.x}, ${cell.y}), available:`,
+    available
+  );
+  return (
+    <div
 			className={clsx(
 				classes[cell.color],
 				classes.cell,
@@ -35,5 +40,5 @@ export const CellComponent: FC<{
 				/>
 			)}
 		</div>
-	)
-}
+  );
+});

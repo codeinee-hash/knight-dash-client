@@ -69,16 +69,16 @@ export class Cell {
     }
   }
 
-  moveFigure(target: Cell) {
-    if (this.figure && this.figure?.canMove(target)) {
-      this.figure.moveFigure(target);
+  // moveFigure(target: Cell) {
+  //   if (this.figure && this.figure?.canMove(target)) {
+  //     this.figure.moveFigure(target);
 
-      if (target.coin) {
-        this.addLostCoin(target.coin.naminal);
-      }
+  //     if (target.coin) {
+  //       this.addLostCoin(target.coin.naminal);
+  //     }
 
-      target.setFigure(this.figure);
-      this.figure = null;
-    }
-  }
+  //     target.setFigure(this.figure);
+  //     this.figure = null;
+  //   }
+  // }
 }

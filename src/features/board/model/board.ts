@@ -22,7 +22,6 @@ export class Board {
     }
 
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
-
     return emptyCells[randomIndex];
   }
 
@@ -132,7 +131,11 @@ export class Board {
     if (from.figure && from.figure.canMove(to)) {
       const hadCoin = !!to.coin;
 
-      from.figure.moveFigure(to);
+      to.setFigure(from.figure);
+      if (hadCoin && to.coin) {
+        to.addLostCoin(to.coin.naminal);
+        to.coin = null;
+      }
       from.figure = null;
 
       playSound(hadCoin ? 'capture' : 'move');

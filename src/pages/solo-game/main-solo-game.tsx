@@ -20,15 +20,6 @@ const SoloGameRoom: FC = () => {
     setBoard(newBoard);
   }
 
-  const scoreBoardCoins = {
-    lotCoin150: board.lostCoint150,
-    lotCoin200: board.lostCoint200,
-    lotCoin250: board.lostCoint250,
-    lotCoin300: board.lostCoint300,
-    lotCoin350: board.lostCoint350,
-    totalScore: board.totalScore,
-  };
-
   return (
     <PageLayout>
       <div className='w-full'>
@@ -48,7 +39,7 @@ const SoloGameRoom: FC = () => {
             <BoardComponent board={board} setBoard={setBoard} />
           </div>
 
-          <ScoreCoins timerKey={0} coins={scoreBoardCoins} isGameRoom={false} />
+          <ScoreCoins timer={0} isGameRoom={false} />
         </div>
       </div>
     </PageLayout>

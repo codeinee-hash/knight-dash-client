@@ -1,9 +1,7 @@
-import { SoloGameRoom } from '@/pages/solo-game/solo-game-room';
 import { ROUTES } from '@/shared/utils/consts/consts';
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { App } from './app';
 import { AuthorizationGuard, protectedLoader } from './auth-guard';
-import { SoloGameRoomGuard } from './solo-game-room-guard';
 
 export const router = createBrowserRouter([
   {
@@ -19,12 +17,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ROUTES.SOLO_GAME_ROOM,
-            element: (
-              <SoloGameRoomGuard>
-                <SoloGameRoom />
-              </SoloGameRoomGuard>
-            ),
-            // lazy: () => import('@/pages/solo-game/solo-game-room'),
+            lazy: () => import('@/pages/solo-game/solo-game-room'),
           },
           // {
           //   path: ROUTES.GAME_DUEL,

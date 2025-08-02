@@ -4,7 +4,6 @@ import logo250 from '@/shared/assets/images/geekcoin 250.svg';
 import logo300 from '@/shared/assets/images/geekcoin 300.svg';
 import logo350 from '@/shared/assets/images/geekcoin 350.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
-import { cn } from '@/shared/lib/utils';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -16,25 +15,31 @@ import {
 import { Button } from '@/shared/ui/kit/button';
 import { ProgresLoader } from '@/shared/ui/progress-loader/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item/score-item';
+import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
-import type { IScoreCoins } from '@/shared/utils/types';
 import { useEffect, useState, type FC } from 'react';
+import { useParams } from 'react-router-dom';
 import { useCreateSoloGame } from '../../model/use-create-session';
+import { useGetSessionStatus } from '../../model/use-get-session-status';
 import { GameModeSelect } from '../game-mode-select';
 import { Timer } from '../timer/timer';
 import classes from './score-coins.module.scss';
 
 export const ScoreCoins: FC<{
-  coins: IScoreCoins;
-  timerKey: number;
+  timer: number;
   isGameRoom: boolean;
-}> = ({ coins, timerKey, isGameRoom }) => {
+  isRunning?: boolean;
+}> = ({ timer, isGameRoom, isRunning }) => {
   const [filter, setFilter] = useState('15');
   const [isCreatingGame, setIsCreatingGame] = useState(true);
 
   const isDesktop = useMediaQuery('(min-width: 510px)');
 
   const createGame = useCreateSoloGame();
+  const { setIsGameOver } = useGame();
+
+  const params = useParams();
+  const { gameSession } = useGetSessionStatus(String(params.gameId));
 
   useEffect(() => {
     setIsCreatingGame(createGame.isPending);
@@ -43,7 +48,13 @@ export const ScoreCoins: FC<{
   return (
     <>
       <div className={classes.lost}>
-        {isDesktop && <Timer timerKey={timerKey} />}
+        {isDesktop && (
+          <Timer
+            initialSeconds={timer}
+            onEnd={() => setIsGameOver(true)}
+            isRunning={isRunning}
+          />
+        )}
 
         {!isGameRoom && (
           <div className='mt-5! mb-8!'>
@@ -57,43 +68,41 @@ export const ScoreCoins: FC<{
           </div>
         )}
 
-        <h3
-          className={cn(
-            'text-white mb-5! max-[510px]:hidden',
-            isGameRoom && 'mt-5!'
-          )}
-        >
-          {'РЕЗУЛЬТАТЫ:'}
-        </h3>
+        {isGameRoom && (
+          <h3 className='text-white mb-5! max-[510px]:hidden mt-5!'>
+            {'РЕЗУЛЬТАТЫ:'}
+          </h3>
+        )}
+
         <div className={classes.lostList}>
           <ScoreItem
             variant='single'
             nominal={150}
-            coins={coins.lotCoin150}
+            coinCount={gameSession?.coint150 as number}
             logo={logo150}
           />
           <ScoreItem
             variant='single'
             nominal={200}
-            coins={coins.lotCoin200}
+            coinCount={gameSession?.coint200 as number}
             logo={logo200}
           />
           <ScoreItem
             variant='single'
             nominal={250}
-            coins={coins.lotCoin250}
+            coinCount={gameSession?.coint250 as number}
             logo={logo250}
           />
           <ScoreItem
             variant='single'
             nominal={300}
-            coins={coins.lotCoin300}
+            coinCount={gameSession?.coint300 as number}
             logo={logo300}
           />
           <ScoreItem
             variant='single'
             nominal={350}
-            coins={coins.lotCoin350}
+            coinCount={gameSession?.coint350 as number}
             logo={logo350}
           />
         </div>
@@ -103,9 +112,9 @@ export const ScoreCoins: FC<{
           <ScoreItem
             variant='total'
             logo={totalGeekCoins}
-            coins={coins.lotCoin350}
+            coinCount={gameSession?.coint350 as number}
             nominal={350}
-            totalScore={coins.totalScore}
+            totalScore={gameSession?.totalScore}
           />
         </div>
       </div>

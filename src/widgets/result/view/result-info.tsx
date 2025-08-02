@@ -1,128 +1,99 @@
-import { useUser } from '@/features/auth/model/use-user';
+import { useGetSessionStatus } from '@/entities/score-coins/model/use-get-session-status';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
 import logo200 from '@/shared/assets/images/geekcoin 200.svg';
 import logo250 from '@/shared/assets/images/geekcoin 250.svg';
 import logo300 from '@/shared/assets/images/geekcoin 300.svg';
 import logo350 from '@/shared/assets/images/geekcoin 350.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
+import {
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/shared/ui/kit/alert-dialog';
+import { Button } from '@/shared/ui/kit/button';
 import { ScoreItem } from '@/shared/ui/score-item/score-item';
-import { Spin } from '@/shared/ui/spiner/spin';
 import { ROUTES } from '@/shared/utils/consts/consts';
-import { useGame } from '@/shared/utils/hooks/use-game';
-import type { IScoreCoins } from '@/shared/utils/types';
-import clsx from 'clsx';
-import { useEffect, type FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSendScore } from '../model/useSendScore';
-import classes from './result-info.module.scss';
+import { getTimeModeImage } from '@/shared/utils/helpers';
+import { type FC } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export const ResultInfo: FC<{ coins: IScoreCoins; onRestart: () => void }> = ({
-  coins,
-  onRestart,
-}) => {
+export const ResultInfo: FC<{ onRestart: () => void }> = ({ onRestart }) => {
   const navigate = useNavigate();
-  const { data, isLoading } = useSendScore();
-  const { player } = useUser();
-  const { fetchScore } = useSendScore();
-  const { setIsGameOver, gameMode } = useGame();
 
-  useEffect(() => {
-    if (player?._id) {
-      fetchScore(player._id, coins.totalScore, gameMode);
-    }
-  }, []);
+  const params = useParams();
+  const { gameSession } = useGetSessionStatus(String(params.gameId));
 
   return (
-    <div className={classes.result}>
-      <h3>Results</h3>
+    <AlertDialogContent className='p-7! bg-[#393939] border-none outline-none text-white'>
+      <AlertDialogHeader className='flex flex-col items-center gap-2'>
+        <img
+          src={getTimeModeImage(gameSession?.timeMode as number)}
+          alt='time mode'
+          width={70}
+          height={70}
+        />
+        <AlertDialogTitle className='text-center text-2xl'>
+          Игра закончена
+        </AlertDialogTitle>
+      </AlertDialogHeader>
 
-      <div className={classes.score}>
-        <p className={classes.title}>score:</p>
-        <div className={classes.scoreList}>
-          <ScoreItem
-            variant='total'
-            logo={totalGeekCoins}
-            coins={coins.lotCoin350}
-            nominal={350}
-            totalScore={coins.totalScore}
-          />
-          <ScoreItem
-            variant='single'
-            nominal={150}
-            coins={coins.lotCoin150}
-            logo={logo150}
-          />
-          <ScoreItem
-            variant='single'
-            nominal={200}
-            coins={coins.lotCoin200}
-            logo={logo200}
-          />
-          <ScoreItem
-            variant='single'
-            nominal={250}
-            coins={coins.lotCoin250}
-            logo={logo250}
-          />
-          <ScoreItem
-            variant='single'
-            nominal={300}
-            coins={coins.lotCoin300}
-            logo={logo300}
-          />
-          <ScoreItem
-            variant='single'
-            nominal={350}
-            coins={coins.lotCoin350}
-            logo={logo350}
-          />
-        </div>
+      <div className='flex flex-col gap-2.5 mb-3!'>
+        <h4 className='mb-3! text-lg font-medium'>Результаты:</h4>
+        <ScoreItem
+          variant='total'
+          logo={totalGeekCoins}
+          coinCount={gameSession?.coint350 as number}
+          nominal={350}
+          totalScore={gameSession?.totalScore}
+        />
+        <ScoreItem
+          variant='single'
+          nominal={150}
+          coinCount={gameSession?.coint150 as number}
+          logo={logo150}
+        />
+        <ScoreItem
+          variant='single'
+          nominal={200}
+          coinCount={gameSession?.coint200 as number}
+          logo={logo200}
+        />
+        <ScoreItem
+          variant='single'
+          nominal={250}
+          coinCount={gameSession?.coint250 as number}
+          logo={logo250}
+        />
+        <ScoreItem
+          variant='single'
+          nominal={300}
+          coinCount={gameSession?.coint300 as number}
+          logo={logo300}
+        />
+        <ScoreItem
+          variant='single'
+          nominal={350}
+          coinCount={gameSession?.coint350 as number}
+          logo={logo350}
+        />
       </div>
 
-      <div className={classes.leaders}>
-        <p className={classes.title}>leaderboard:</p>{' '}
-        {isLoading ? (
-          <div className={classes.spinner}>
-            <Spin />
-          </div>
-        ) : (
-          <ul className={classes.list}>
-            {data?.slice(0, 3).map((user, idx) => (
-              <li key={user._id} className={classes.player}>
-                <p className={classes.login}>
-                  {idx + 1}.{' '}
-                  <span
-                    className={clsx(user._id === player?._id && classes.itsMe)}
-                  >
-                    {user.login}
-                  </span>
-                </p>
-                <p className={classes.score}>{user.score}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div className={classes.btns}>
-        <button
-          onClick={() => {
-            onRestart();
-            setIsGameOver(false);
-          }}
-          type='button'
-          className={classes.restart}
+      <AlertDialogFooter>
+        <Button
+          className='text-white/60 px-3! bg-[#202020]'
+          onClick={() => navigate(ROUTES.SOLO_GAME)}
         >
-          Restart
-        </button>
-        <button
-          onClick={() => navigate(ROUTES.INTRO)}
-          type='button'
-          className={classes.quit}
+          На главную
+        </Button>
+        <AlertDialogAction
+          onClick={onRestart}
+          className='text-[#F5D91F]/80 px-3! bg-[#202020]'
         >
-          Main
-        </button>
-      </div>
-    </div>
+          Начать снова
+        </AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
   );
 };
