@@ -1,7 +1,5 @@
 import { $authApi } from '@/shared/api/axios';
 import { useMutation } from '@tanstack/react-query';
-import type { AxiosError } from 'axios';
-import { toast } from 'sonner';
 
 export function useSubmitScore() {
   const submitScoreMutation = useMutation({
@@ -17,22 +15,21 @@ export function useSubmitScore() {
       });
       return res.data;
     },
-    onSuccess: (data) => {
-      console.log('Score submitted successfully:', data);
-      toast.success(`Очки +${data.score} добавлены!`);
-    },
-    onError: (error: AxiosError) => {
-      console.error('Error submitting score:', error);
-      if (error.response?.status === 400) {
-        toast.error('Неверный номинал монеты');
-      } else if (error.response?.status === 403) {
-        toast.error('Игра уже закончена');
-      } else if (error.response?.status === 404) {
-        toast.error('Игра не найдена');
-      } else {
-        toast.error('Ошибка при обновлении очков');
-      }
-    },
+    //  onSuccess: (data) => {
+    //    console.log('Score submitted successfully:', data);
+    //  },
+    //  onError: (error: AxiosError) => {
+    //    console.error('Error submitting score:', error);
+    //    if (error.response?.status === 400) {
+    //      toast.error('Неверный номинал монеты');
+    //    } else if (error.response?.status === 403) {
+    //      toast.error('Игра уже закончена');
+    //    } else if (error.response?.status === 404) {
+    //      toast.error('Игра не найдена');
+    //    } else {
+    //      toast.error('Ошибка при обновлении очков');
+    //    }
+    //  },
   });
 
   return {

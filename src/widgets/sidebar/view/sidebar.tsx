@@ -1,3 +1,4 @@
+import { useDeleteGame } from '@/entities/score-coins';
 import type { SoloGameSession } from '@/entities/score-coins/model/use-get-session-status';
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
@@ -32,6 +33,8 @@ export function Sidebar({
   const [isGameProccess, setIsGameProccess] = useState(false);
 
   const session = useSession((state) => state.session);
+
+  const removeGameSession = useDeleteGame();
 
   const navigate = useNavigate();
 
@@ -148,12 +151,16 @@ export function Sidebar({
             <Button
               type='button'
               onClick={() => {
-                setIsGameProccess(false);
-                navigate(ROUTES.SOLO_GAME, { replace: true });
+                removeGameSession.deleteGame(soloGameSession.gameId, {
+                  onSuccess() {
+                    navigate(ROUTES.SOLO_GAME, { replace: true });
+                  },
+                });
               }}
+              disabled={removeGameSession.isPending}
               className='px-4! mt-2! h-[44px] cursor-pointer rounded-[10px] bg-[#202020] text-[#f5d91f] font-medium text-base'
             >
-              Продолжить
+              {removeGameSession.isPending ? 'Загрузка...' : 'Продолжить'}
             </Button>
           </DialogFooter>
         </DialogContent>

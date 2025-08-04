@@ -1,4 +1,5 @@
 import { useSubmitScore } from '@/entities/score-coins';
+import { useGame } from '@/shared/utils/hooks/use-game';
 import type { FC } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,7 +14,9 @@ export const BoardComponent: FC<{
 }> = React.memo(({ board, setBoard }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
   const [availableCells, setAvailableCells] = useState<[number, number][]>([]);
-  const { submitScore, isPending: isSubmittingScore } = useSubmitScore();
+  const { submitScore } = useSubmitScore();
+
+  const setIsGameOver = useGame((state) => state.setIsGameOver);
 
   const params = useParams();
 
@@ -72,7 +75,16 @@ export const BoardComponent: FC<{
           console.log(
             `Submitting score ${score} for gameId ${String(params.gameId)}`
           );
-          submitScore({ gameId: String(params.gameId), score });
+          submitScore(
+            { gameId: String(params.gameId), score },
+            {
+              onError(err) {
+                if (err.status === 403) {
+                  setIsGameOver(true);
+                }
+              },
+            }
+          );
         }
 
         return;

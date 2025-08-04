@@ -37,6 +37,7 @@ export const useSession = create<SessionStore>((set, get) => {
     logout() {
       localStorage.removeItem(Tokens.ACCESS);
       set({ token: null, session: null });
+      $mainApi.post('auth/logout');
     },
 
     async refresh() {
