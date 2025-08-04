@@ -170,6 +170,6 @@ export class Board {
 
   public addFigures() {
     this.addKnights();
-    // ..
+    // ...
   }
 }

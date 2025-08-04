@@ -1,4 +1,4 @@
-import { useGetSessionStatus } from '@/entities/score-coins/model/use-get-session-status';
+import { type SoloGameSession } from '@/entities/score-coins/model/use-get-session-status';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
 import logo200 from '@/shared/assets/images/geekcoin 200.svg';
 import logo250 from '@/shared/assets/images/geekcoin 250.svg';
@@ -17,13 +17,13 @@ import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { ROUTES } from '@/shared/utils/consts/consts';
 import { getTimeModeImage } from '@/shared/utils/helpers';
 import { type FC } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export const ResultInfo: FC<{ onRestart: () => void }> = ({ onRestart }) => {
+export const ResultInfo: FC<{
+  onRestart: () => void;
+  gameSession: SoloGameSession;
+}> = ({ onRestart, gameSession }) => {
   const navigate = useNavigate();
-
-  const params = useParams();
-  const { gameSession } = useGetSessionStatus(String(params.gameId));
 
   return (
     <AlertDialogContent className='p-7! bg-[#393939] border-none outline-none text-white'>
@@ -34,13 +34,12 @@ export const ResultInfo: FC<{ onRestart: () => void }> = ({ onRestart }) => {
           width={70}
           height={70}
         />
-        <AlertDialogTitle className='text-center text-2xl'>
+        <AlertDialogTitle className='text-center text-2xl mb-4!'>
           Игра закончена
         </AlertDialogTitle>
       </AlertDialogHeader>
 
       <div className='flex flex-col gap-2.5 mb-3!'>
-        <h4 className='mb-3! text-lg font-medium'>Результаты:</h4>
         <ScoreItem
           variant='total'
           logo={totalGeekCoins}

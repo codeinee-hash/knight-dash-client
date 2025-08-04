@@ -18,9 +18,8 @@ import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { useEffect, useState, type FC } from 'react';
-import { useParams } from 'react-router-dom';
 import { useCreateSoloGame } from '../../model/use-create-session';
-import { useGetSessionStatus } from '../../model/use-get-session-status';
+import { type SoloGameSession } from '../../model/use-get-session-status';
 import { GameModeSelect } from '../game-mode-select';
 import { Timer } from '../timer/timer';
 import classes from './score-coins.module.scss';
@@ -29,7 +28,8 @@ export const ScoreCoins: FC<{
   timer: number;
   isGameRoom: boolean;
   isRunning?: boolean;
-}> = ({ timer, isGameRoom, isRunning }) => {
+  gameSession?: SoloGameSession;
+}> = ({ timer, isGameRoom, isRunning, gameSession }) => {
   const [filter, setFilter] = useState('15');
   const [isCreatingGame, setIsCreatingGame] = useState(true);
 
@@ -37,9 +37,6 @@ export const ScoreCoins: FC<{
 
   const createGame = useCreateSoloGame();
   const { setIsGameOver } = useGame();
-
-  const params = useParams();
-  const { gameSession } = useGetSessionStatus(String(params.gameId));
 
   useEffect(() => {
     setIsCreatingGame(createGame.isPending);

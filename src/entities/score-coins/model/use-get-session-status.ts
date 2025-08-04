@@ -1,7 +1,7 @@
 import { $authApi } from '@/shared/api/axios';
 import { useQuery } from '@tanstack/react-query';
 
-interface SoloGameSession {
+export interface SoloGameSession {
   gameId: string;
   timeMode: number;
   remainingTime: number;

@@ -20,9 +20,13 @@ export function useCreateSoloGame() {
       return res.data;
     },
     onSuccess: (data) => {
-      navigate(ROUTES.SOLO_GAME_ROOM.replace(':gameId', data._id), {
-        replace: true,
-      });
+      const gameUrl = ROUTES.SOLO_GAME_ROOM.replace(':gameId', data._id);
+      // Добавляем фиктивную запись в историю
+      window.history.pushState(null, '', gameUrl);
+      // Заменяем текущую запись
+      window.history.replaceState(null, '', gameUrl);
+      // Выполняем редирект
+      navigate(gameUrl, { replace: true });
     },
     onError: (err) => {
       if (err.name === 'CanceledError') {
@@ -30,6 +34,8 @@ export function useCreateSoloGame() {
       } else {
         toast.error('Ошибка при создании игры');
       }
+
+      navigate(ROUTES.SOLO_GAME);
     },
   });
 

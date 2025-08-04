@@ -10,7 +10,7 @@ import { CoinNaminals } from '@/shared/utils/consts/consts';
 
 export class Coin {
   id: string;
-  logo: typeof logo150 | null;
+  logo: string | null;
   cell: Cell;
   naminal: CoinNaminals;
 
@@ -40,7 +40,5 @@ export class Coin {
     if (cell) {
       cell.coin = this;
     }
-
-    // this.cell.coin = this
   }
 }

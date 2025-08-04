@@ -50,22 +50,8 @@ export class Cell {
   }
 
   addLostCoin(coinNaminal: CoinNaminals | undefined) {
-    switch (coinNaminal) {
-      case CoinNaminals.COIN150:
-        this.board.lostCoint150.push(coinNaminal);
-        break;
-      case CoinNaminals.COIN200:
-        this.board.lostCoint200.push(coinNaminal);
-        break;
-      case CoinNaminals.COIN250:
-        this.board.lostCoint250.push(coinNaminal);
-        break;
-      case CoinNaminals.COIN300:
-        this.board.lostCoint300.push(coinNaminal);
-        break;
-      case CoinNaminals.COIN350:
-        this.board.lostCoint350.push(coinNaminal);
-        break;
+    if (coinNaminal) {
+      this.board[`lostCoint${coinNaminal}`].push(coinNaminal);
     }
   }
 

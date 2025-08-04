@@ -7,38 +7,34 @@ import classes from './cell.module.scss';
 export const CellComponent: FC<{
   cell: Cell;
   selected: boolean;
-  available: boolean; // Новый пропс
+  available: boolean;
   onClick: (cell: Cell) => void;
 }> = memo(({ cell, selected, available, onClick }) => {
-  console.log(
-    `Rendering CellComponent (${cell.x}, ${cell.y}), available:`,
-    available
-  );
   return (
     <div
-			className={clsx(
-				classes[cell.color],
-				classes.cell,
-				selected && classes.selected,
-				cell.available && cell.coin && classes.takeFigure
-			)}
-			onClick={() => onClick(cell)}
-		>
-			{!cell.coin && cell.available && <div className={classes.available} />}
-			{cell.figure?.logo && (
-				<img
-					src={cell.figure.logo}
-					alt={`${cell.figure.color}-${cell.figure.name}`}
-					className={classes.figure}
-				/>
-			)}
-			{cell.coin?.logo && (
-				<img
-					src={cell.coin.logo}
-					alt={`coin-${cell.coin.naminal}`}
-					className={classes.coinLogo}
-				/>
-			)}
-		</div>
+      className={clsx(
+        classes[cell.color],
+        classes.cell,
+        selected && classes.selected,
+        available && cell.coin && classes.takeFigure
+      )}
+      onClick={() => onClick(cell)}
+    >
+      {!cell.coin && available && <div className={classes.available} />}
+      {cell.figure?.logo && (
+        <img
+          src={cell.figure.logo}
+          alt={`${cell.figure.color}-${cell.figure.name}`}
+          className={classes.figure}
+        />
+      )}
+      {cell.coin?.logo && (
+        <img
+          src={cell.coin.logo}
+          alt={`coin-${cell.coin.naminal}`}
+          className={classes.coinLogo}
+        />
+      )}
+    </div>
   );
 });

@@ -1,3 +1,4 @@
+import type { SoloGameSession } from '@/entities/score-coins/model/use-get-session-status';
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { useSession } from '@/shared/model/use-session';
@@ -6,6 +7,8 @@ import { Button } from '@/shared/ui/kit/button';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/shared/ui/kit/dialog';
@@ -17,11 +20,16 @@ import { ChevronRight, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export function Sidebar() {
+export function Sidebar({
+  soloGameSession,
+}: {
+  soloGameSession: SoloGameSession;
+}) {
   const [open, setOpen] = useState(false);
   const [isGameRulesOpen, setIsGameRulesOpen] = useState(false);
   const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
   const [isDuelDevModal, setIsDuelDevModal] = useState(false);
+  const [isGameProccess, setIsGameProccess] = useState(false);
 
   const session = useSession((state) => state.session);
 
@@ -68,6 +76,12 @@ export function Sidebar() {
                   key={idx}
                   className='w-full py-3! px-6! rounded text-base font-medium flex items-center gap-2.5 cursor-pointer hover:bg-[#494949]'
                   onClick={() => {
+                    if (soloGameSession && !soloGameSession.finished) {
+                      setOpen(false);
+                      setIsGameProccess(true);
+                      return;
+                    }
+
                     if (item.lable === 'Правила игры') {
                       setIsGameRulesOpen(true);
                     } else if (item.lable === 'Таблица лидеров') {
@@ -110,6 +124,39 @@ export function Sidebar() {
 
       <Dialog open={isGameRulesOpen} onOpenChange={setIsGameRulesOpen}>
         <GameRules />
+      </Dialog>
+
+      <Dialog open={isGameProccess} onOpenChange={setIsGameProccess}>
+        <DialogContent className='rounded-[12px] bg-[#393939] p-7! outline-none! border-none! text-white'>
+          <DialogHeader>
+            <DialogTitle className='text-[28px] font-bold text-center'>
+              Внимание
+            </DialogTitle>
+            <DialogDescription>
+              Вы покидаете игру. Весь текущий прогресс будет утерян. Продолжить?
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter>
+            <Button
+              type='button'
+              onClick={() => setIsGameProccess(false)}
+              className='px-4! mt-2! h-[44px] cursor-pointer rounded-[10px] bg-[#202020] text-white/70 font-medium text-base'
+            >
+              Отмена
+            </Button>
+            <Button
+              type='button'
+              onClick={() => {
+                setIsGameProccess(false);
+                navigate(ROUTES.SOLO_GAME, { replace: true });
+              }}
+              className='px-4! mt-2! h-[44px] cursor-pointer rounded-[10px] bg-[#202020] text-[#f5d91f] font-medium text-base'
+            >
+              Продолжить
+            </Button>
+          </DialogFooter>
+        </DialogContent>
       </Dialog>
 
       <Dialog open={isDuelDevModal} onOpenChange={setIsDuelDevModal}>

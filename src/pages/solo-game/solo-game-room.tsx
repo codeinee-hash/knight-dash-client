@@ -44,18 +44,17 @@ const SoloGameRoom: FC = () => {
   const session = useSession((state) => state.session);
   const isDesktop = useMediaQuery('(min-width: 1201px)');
   const params = useParams();
+
   const { gameSession, isPending } = useGetSessionStatus(String(params.gameId));
   const { isGameOver, setIsGameOver } = useGame();
   const createGame = useCreateSoloGame();
 
-  // Мемоизируем initialSeconds
   const initialSeconds = useMemo(
     () => gameSession?.remainingTime ?? 0,
     [gameSession]
   );
 
   const handleGameOver = useCallback(() => {
-    console.log('Game over triggered');
     setIsGameOver(true);
   }, [setIsGameOver]);
 
@@ -65,7 +64,6 @@ const SoloGameRoom: FC = () => {
 
   useEffect(() => {
     if (gameSession && !gameSession.finished) {
-      console.log('Initializing game with gameSession:', gameSession);
       setIsGameOver(false);
       init();
     } else {
@@ -97,15 +95,6 @@ const SoloGameRoom: FC = () => {
 
   const memoizedBoard = useMemo(() => board, [board]);
 
-  console.log(
-    'Rendering SoloGameRoom with board:',
-    board,
-    'isGameOver:',
-    isGameOver,
-    'initialSeconds:',
-    initialSeconds
-  );
-
   if (isPending) {
     return (
       <h1 className='text-3xl text-white/60 font-bold text-center mt-20!'>
@@ -123,7 +112,7 @@ const SoloGameRoom: FC = () => {
   }
 
   return (
-    <PageLayout>
+    <PageLayout soloGameSession={gameSession}>
       <div className='w-full'>
         <div className='flex pt-8! max-md:pt-[18px]! relative justify-center max-[1200px]:flex-col max-[1200px]:items-center'>
           <div className='min-[1201px]:absolute min-[1201px]:left-1/2 min-[1201px]:-translate-x-1/2'>
@@ -155,6 +144,7 @@ const SoloGameRoom: FC = () => {
               timer={initialSeconds}
               isGameRoom
               isRunning={!isGameOver}
+              gameSession={gameSession}
             />
           )}
 
@@ -239,6 +229,7 @@ const SoloGameRoom: FC = () => {
 
       <AlertDialog open={isGameOver} onOpenChange={setIsGameOver}>
         <ResultInfo
+          gameSession={gameSession}
           onRestart={() => createGame.create(Number(gameSession.timeMode))}
         />
       </AlertDialog>

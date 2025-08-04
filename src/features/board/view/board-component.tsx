@@ -1,5 +1,7 @@
+import { useSubmitScore } from '@/entities/score-coins';
 import type { FC } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { CellComponent } from '../../cell';
 import type { Cell } from '../../cell/model/cell';
 import { Board } from '../model/board';
@@ -11,12 +13,13 @@ export const BoardComponent: FC<{
 }> = React.memo(({ board, setBoard }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
   const [availableCells, setAvailableCells] = useState<[number, number][]>([]);
+  const { submitScore, isPending: isSubmittingScore } = useSubmitScore();
+
+  const params = useParams();
 
   const highlightCells = useCallback(() => {
-    console.log('Calling highlightCells with selectedCell:', selectedCell);
-    // Очищаем предыдущие подсветки
     board.clearHighlights();
-    
+
     if (selectedCell?.figure) {
       const newAvailableCells: [number, number][] = [];
       for (let i = 0; i < board.cells.length; i++) {
@@ -24,7 +27,6 @@ export const BoardComponent: FC<{
           const target = board.cells[i][j];
           if (selectedCell.figure.canMove(target)) {
             newAvailableCells.push([target.x, target.y]);
-            console.log(`Cell (${target.x}, ${target.y}) is available`);
           }
         }
       }
@@ -35,7 +37,6 @@ export const BoardComponent: FC<{
   }, [board, selectedCell]);
 
   const updateBoard = useCallback(() => {
-    console.log('Updating board state');
     const newBoard = board.getCopyBoard();
     setBoard(newBoard);
   }, [board, setBoard]);
@@ -46,10 +47,9 @@ export const BoardComponent: FC<{
 
   const onClick = useCallback(
     (cell: Cell) => {
-      console.log(`Clicked cell (${cell.x}, ${cell.y}), has figure:`, !!cell.figure);
       if (selectedCell === cell) {
         setSelectedCell(null);
-        setAvailableCells([]); // Очищаем подсветку
+        setAvailableCells([]);
         board.clearHighlights();
         return;
       }
@@ -59,23 +59,32 @@ export const BoardComponent: FC<{
         selectedCell !== cell &&
         selectedCell.figure?.canMove(cell)
       ) {
+        const hadCoin = !!cell.coin;
+        const coinNaminal = cell.coin?.naminal;
         board.moveFigure(selectedCell, cell);
         setSelectedCell(null);
-        setAvailableCells([]); // Очищаем подсветку
+        setAvailableCells([]);
         board.clearHighlights();
-        updateBoard(); // Обновляем после перемещения
+        updateBoard();
+
+        if (hadCoin && coinNaminal) {
+          const score = coinNaminal;
+          console.log(
+            `Submitting score ${score} for gameId ${String(params.gameId)}`
+          );
+          submitScore({ gameId: String(params.gameId), score });
+        }
+
         return;
       }
 
       if (cell.figure) {
         setSelectedCell(cell);
-        highlightCells(); // Подсвечиваем клетки
+        highlightCells();
       }
     },
     [selectedCell, board, highlightCells, updateBoard]
   );
-
-  console.log('Rendering BoardComponent with selectedCell:', selectedCell);
 
   return (
     <div className={classes.wrapper}>
@@ -87,8 +96,12 @@ export const BoardComponent: FC<{
                 key={cell.id}
                 cell={cell}
                 onClick={onClick}
-                selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
-                available={availableCells.some(([x, y]) => x === cell.x && y === cell.y)}
+                selected={
+                  cell.x === selectedCell?.x && cell.y === selectedCell?.y
+                }
+                available={availableCells.some(
+                  ([x, y]) => x === cell.x && y === cell.y
+                )}
               />
             ))}
           </React.Fragment>
