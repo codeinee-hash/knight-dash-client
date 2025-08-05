@@ -1,7 +1,12 @@
 import { $authApi } from '@/shared/api/axios';
-import { useMutation } from '@tanstack/react-query';
+import { useGame } from '@/shared/utils/hooks/use-game';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { AxiosError } from 'axios';
 
 export function useSubmitScore() {
+  const queryClient = useQueryClient();
+  const setIsGameOver = useGame((state) => state.setIsGameOver);
+
   const submitScoreMutation = useMutation({
     mutationFn: async ({
       gameId,
@@ -15,21 +20,16 @@ export function useSubmitScore() {
       });
       return res.data;
     },
-    //  onSuccess: (data) => {
-    //    console.log('Score submitted successfully:', data);
-    //  },
-    //  onError: (error: AxiosError) => {
-    //    console.error('Error submitting score:', error);
-    //    if (error.response?.status === 400) {
-    //      toast.error('Неверный номинал монеты');
-    //    } else if (error.response?.status === 403) {
-    //      toast.error('Игра уже закончена');
-    //    } else if (error.response?.status === 404) {
-    //      toast.error('Игра не найдена');
-    //    } else {
-    //      toast.error('Ошибка при обновлении очков');
-    //    }
-    //  },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ['solo-game-info', data?._id],
+      });
+    },
+    onError: (error: AxiosError) => {
+      if (error.response?.status === 403) {
+        setIsGameOver(true);
+      }
+    },
   });
 
   return {

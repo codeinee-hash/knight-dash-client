@@ -18,17 +18,16 @@ import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { useEffect, useState, type FC } from 'react';
-import { useCreateSoloGame } from '../../model/use-create-session';
-import { type SoloGameSession } from '../../model/use-get-session-status';
-import { GameModeSelect } from '../game-mode-select';
-import { Timer } from '../timer/timer';
-import classes from './score-coins.module.scss';
+import { useCreateSoloGame } from '../model/use-create-session';
+import type { SoloGameSessionInfo } from '../model/use-get-session-info';
+import { GameModeSelect } from './game-mode-select';
+import { Timer } from './timer';
 
 export const ScoreCoins: FC<{
   timer: number;
   isGameRoom: boolean;
   isRunning?: boolean;
-  gameSession?: SoloGameSession;
+  gameSession?: SoloGameSessionInfo;
 }> = ({ timer, isGameRoom, isRunning, gameSession }) => {
   const [filter, setFilter] = useState('15');
   const [isCreatingGame, setIsCreatingGame] = useState(true);
@@ -44,7 +43,7 @@ export const ScoreCoins: FC<{
 
   return (
     <>
-      <div className={classes.lost}>
+      <div className='p-5! bg-[#393939] rounded-[8px] ml-auto! max-[1200px]:ml-0! max-[1200px]:max-w-[480px] max-[1200px]:w-full max-[1200px]:mt-5! max-[1200px]:mb-[50px]! max-[510px]:max-w-[352px] max-[390px]:max-w-[288px]'>
         {isDesktop && (
           <Timer
             initialSeconds={timer}
@@ -71,45 +70,47 @@ export const ScoreCoins: FC<{
           </h3>
         )}
 
-        <div className={classes.lostList}>
+        <div className='flex flex-col gap-[5px] text-white pb-5! border-b border-b-[#666666] min-[1201px]:w-[280px]'>
           <ScoreItem
             variant='single'
             nominal={150}
-            coinCount={gameSession?.coint150 as number}
+            coinCount={gameSession?.score150 as number}
             logo={logo150}
           />
           <ScoreItem
             variant='single'
             nominal={200}
-            coinCount={gameSession?.coint200 as number}
+            coinCount={gameSession?.score200 as number}
             logo={logo200}
           />
           <ScoreItem
             variant='single'
             nominal={250}
-            coinCount={gameSession?.coint250 as number}
+            coinCount={gameSession?.score250 as number}
             logo={logo250}
           />
           <ScoreItem
             variant='single'
             nominal={300}
-            coinCount={gameSession?.coint300 as number}
+            coinCount={gameSession?.score300 as number}
             logo={logo300}
           />
           <ScoreItem
             variant='single'
             nominal={350}
-            coinCount={gameSession?.coint350 as number}
+            coinCount={gameSession?.score350 as number}
             logo={logo350}
           />
         </div>
 
-        <div className={classes.total}>
-          <h4>Общий:</h4>
+        <div className='text-[15px] pt-[30px]!'>
+          <h4 className='text-base mb-[15px]! text-white font-medium '>
+            Общий:
+          </h4>
           <ScoreItem
             variant='total'
             logo={totalGeekCoins}
-            coinCount={gameSession?.coint350 as number}
+            coinCount={gameSession?.score350 as number}
             nominal={350}
             totalScore={gameSession?.totalScore}
           />

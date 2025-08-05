@@ -5,9 +5,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/ui/kit/dialog';
-import { rules } from '@/shared/utils/consts/consts';
+import { ROUTES, rules } from '@/shared/utils/consts/consts';
+import { useNavigate } from 'react-router-dom';
 
 export function GameRules() {
+  const navigate = useNavigate();
+
   return (
     <DialogContent className='rounded-[12px] bg-[#393939] p-7! outline-none! border-none! text-white'>
       <DialogHeader>
@@ -30,9 +33,10 @@ export function GameRules() {
       </div>
       <Button
         type='button'
+        onClick={() => navigate(ROUTES.SOLO_GAME)}
         className='w-full mt-2! h-[44px] cursor-pointer rounded-[10px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
       >
-        Начать игру
+        Играть
       </Button>
     </DialogContent>
   );

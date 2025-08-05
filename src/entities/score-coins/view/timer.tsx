@@ -1,7 +1,6 @@
 import { formatTime } from '@/shared/utils/helpers';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import classes from './timer.module.scss';
 
 type Props = {
   initialSeconds: number;
@@ -64,8 +63,16 @@ export const Timer: FC<Props> = ({
   }, [isRunning, onEnd, timeLeft]);
 
   if (!initialSeconds) {
-    return <div className={classes.timer}>00:00:00</div>;
+    return (
+      <div className='w-[120px] h-[44px] rounded border border-[#f5d91f] flex items-center justify-center font-medium bg-[#393939] text-white shadow-[0_0_6px_2px_#f5d91f]'>
+        00:00:00
+      </div>
+    );
   }
 
-  return <div className={classes.timer}>{formatTime(Number(timeLeft))}</div>;
+  return (
+    <div className='w-[120px] h-[44px] rounded border border-[#f5d91f] flex items-center justify-center font-medium bg-[#393939] text-white shadow-[0_0_6px_2px_#f5d91f]'>
+      {formatTime(Number(timeLeft))}
+    </div>
+  );
 };

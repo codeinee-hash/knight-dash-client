@@ -1,7 +1,11 @@
-import { ScoreCoins } from '@/entities/score-coins';
-import { useCreateSoloGame } from '@/entities/score-coins/model/use-create-session';
-import { useGetSessionStatus } from '@/entities/score-coins/model/use-get-session-status';
-import { Timer } from '@/entities/score-coins/view/timer/timer';
+import {
+  ScoreCoins,
+  useCreateSoloGame,
+  useGetSessionInfo,
+  useGetSessionStatus,
+} from '@/entities/score-coins';
+import type { SoloGameSessionInfo } from '@/entities/score-coins/model/use-get-session-info';
+import { Timer } from '@/entities/score-coins/view/timer';
 import { BoardComponent } from '@/features/board';
 import { Board } from '@/features/board/model/board';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
@@ -21,7 +25,6 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui/kit/alert-dialog';
 import { Button } from '@/shared/ui/kit/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/kit/tabs';
 import { ProgresLoader } from '@/shared/ui/progress-loader/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item/score-item';
 import { useGame } from '@/shared/utils/hooks/use-game';
@@ -46,6 +49,10 @@ const SoloGameRoom: FC = () => {
   const params = useParams();
 
   const { gameSession, isPending } = useGetSessionStatus(String(params.gameId));
+  const { gameSession: soloGameInfo } = useGetSessionInfo(
+    String(params.gameId)
+  );
+
   const { isGameOver, setIsGameOver } = useGame();
   const createGame = useCreateSoloGame();
 
@@ -144,84 +151,58 @@ const SoloGameRoom: FC = () => {
               timer={initialSeconds}
               isGameRoom
               isRunning={!isGameOver}
-              gameSession={gameSession}
+              gameSession={soloGameInfo}
             />
           )}
 
           {!isDesktop && (
             <div className='max-w-[480px] max-[510px]:max-w-[352px] max-[390px]:max-w-[288px] w-full mt-6!'>
-              <Tabs defaultValue='scoreboard' className='w-full'>
-                <TabsList className='flex gap-1'>
-                  <TabsTrigger
-                    value='scoreboard'
-                    className='bg-[#494949] p-2.5! text-white text-base font-medium'
-                  >
-                    Результаты
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value='leaderboard'
-                    className='bg-[#494949] p-2.5! text-white text-base font-medium'
-                  >
-                    Лидеры
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent
-                  value='scoreboard'
-                  className='bg-[#393939] p-2.5! text-white mb-8! rounded-lg'
-                >
-                  <div className='w-full flex flex-col gap-1 text-white pb-[20px]! pt-3! px-2! border-b border-b-[#666666]'>
-                    <ScoreItem
-                      variant='single'
-                      nominal={150}
-                      coinCount={board.lostCoint150.length}
-                      logo={logo150}
-                    />
-                    <ScoreItem
-                      variant='single'
-                      nominal={200}
-                      coinCount={board.lostCoint200.length}
-                      logo={logo200}
-                    />
-                    <ScoreItem
-                      variant='single'
-                      nominal={250}
-                      coinCount={board.lostCoint250.length}
-                      logo={logo250}
-                    />
-                    <ScoreItem
-                      variant='single'
-                      nominal={300}
-                      coinCount={board.lostCoint300.length}
-                      logo={logo300}
-                    />
-                    <ScoreItem
-                      variant='single'
-                      nominal={350}
-                      coinCount={board.lostCoint350.length}
-                      logo={logo350}
-                    />
-                  </div>
-                  <div className='text-[15px] pt-[30px]! pb-3! px-2!'>
-                    <h4 className='text-base mb-[15px]! text-white font-medium'>
-                      Общий:
-                    </h4>
-                    <ScoreItem
-                      variant='total'
-                      logo={totalGeekCoins}
-                      coinCount={board.lostCoint350.length}
-                      nominal={350}
-                      totalScore={board.totalScore}
-                    />
-                  </div>
-                </TabsContent>
-                <TabsContent
-                  value='leaderboard'
-                  className='bg-[#393939] p-2.5! text-white'
-                >
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic,
-                  ab? 12
-                </TabsContent>
-              </Tabs>
+              <div className='bg-[#393939] p-2.5! text-white mb-8! rounded-lg'>
+                <div className=' w-full flex flex-col gap-1 text-white pb-[20px]! pt-3! px-2! border-b border-b-[#666666]'>
+                  <ScoreItem
+                    variant='single'
+                    nominal={150}
+                    coinCount={soloGameInfo?.score150 as number}
+                    logo={logo150}
+                  />
+                  <ScoreItem
+                    variant='single'
+                    nominal={200}
+                    coinCount={soloGameInfo?.score200 as number}
+                    logo={logo200}
+                  />
+                  <ScoreItem
+                    variant='single'
+                    nominal={250}
+                    coinCount={soloGameInfo?.score250 as number}
+                    logo={logo250}
+                  />
+                  <ScoreItem
+                    variant='single'
+                    nominal={300}
+                    coinCount={soloGameInfo?.score300 as number}
+                    logo={logo300}
+                  />
+                  <ScoreItem
+                    variant='single'
+                    nominal={350}
+                    coinCount={soloGameInfo?.score350 as number}
+                    logo={logo350}
+                  />
+                </div>
+                <div className='text-[15px] pt-[30px]! pb-3! px-2!'>
+                  <h4 className='text-base mb-[15px]! text-white font-medium'>
+                    Общий:
+                  </h4>
+                  <ScoreItem
+                    variant='total'
+                    logo={totalGeekCoins}
+                    coinCount={soloGameInfo?.score350 as number}
+                    nominal={350}
+                    totalScore={board.totalScore}
+                  />
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -229,7 +210,7 @@ const SoloGameRoom: FC = () => {
 
       <AlertDialog open={isGameOver} onOpenChange={setIsGameOver}>
         <ResultInfo
-          gameSession={gameSession}
+          gameSession={soloGameInfo as SoloGameSessionInfo}
           onRestart={() => createGame.create(Number(gameSession.timeMode))}
         />
       </AlertDialog>

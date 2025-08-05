@@ -16,7 +16,7 @@ export interface SoloGameSession {
 
 export function useGetSessionStatus(gameId: string) {
   const sessionStatusQuery = useQuery({
-    queryKey: ['session-status', gameId],
+    queryKey: ['solo-game', gameId],
     queryFn: async () => {
       const { data } = await $authApi.get<SoloGameSession>(
         `solo-game/${gameId}/status`

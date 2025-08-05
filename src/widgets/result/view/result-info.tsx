@@ -1,4 +1,4 @@
-import { type SoloGameSession } from '@/entities/score-coins/model/use-get-session-status';
+import type { SoloGameSessionInfo } from '@/entities/score-coins/model/use-get-session-info';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
 import logo200 from '@/shared/assets/images/geekcoin 200.svg';
 import logo250 from '@/shared/assets/images/geekcoin 250.svg';
@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ResultInfo: FC<{
   onRestart: () => void;
-  gameSession: SoloGameSession;
+  gameSession: SoloGameSessionInfo;
 }> = ({ onRestart, gameSession }) => {
   const navigate = useNavigate();
 
@@ -43,38 +43,38 @@ export const ResultInfo: FC<{
         <ScoreItem
           variant='total'
           logo={totalGeekCoins}
-          coinCount={gameSession?.coint350 as number}
+          coinCount={gameSession?.score350 as number}
           nominal={350}
           totalScore={gameSession?.totalScore}
         />
         <ScoreItem
           variant='single'
           nominal={150}
-          coinCount={gameSession?.coint150 as number}
+          coinCount={gameSession?.score150 as number}
           logo={logo150}
         />
         <ScoreItem
           variant='single'
           nominal={200}
-          coinCount={gameSession?.coint200 as number}
+          coinCount={gameSession?.score200 as number}
           logo={logo200}
         />
         <ScoreItem
           variant='single'
           nominal={250}
-          coinCount={gameSession?.coint250 as number}
+          coinCount={gameSession?.score250 as number}
           logo={logo250}
         />
         <ScoreItem
           variant='single'
           nominal={300}
-          coinCount={gameSession?.coint300 as number}
+          coinCount={gameSession?.score300 as number}
           logo={logo300}
         />
         <ScoreItem
           variant='single'
           nominal={350}
-          coinCount={gameSession?.coint350 as number}
+          coinCount={gameSession?.score350 as number}
           logo={logo350}
         />
       </div>
