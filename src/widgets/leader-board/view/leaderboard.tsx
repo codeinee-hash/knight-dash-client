@@ -11,7 +11,7 @@ import { Spin } from '@/shared/ui/spiner/spin';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useState } from 'react';
-import { useLeaderBoard } from '../model/useLeaderBoard';
+import { useTopPlayers } from '../model/use-leader-board';
 
 const ITEMS_PER_PAGE = 5;
 
@@ -26,9 +26,11 @@ export function LeaderBoard({
 }) {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
-  const { data, isLoading } = useLeaderBoard();
+  const { data, isLoading } = useTopPlayers();
 
-  const visibleData = data?.slice(0, visibleCount);
+  const modeData = data?.data.find((item) => item.timeMode === Number(mode));
+  const players = modeData?.players || [];
+  const visibleData = players.slice(0, visibleCount);
 
   return (
     <div className='w-full bg-[#393939] rounded-[8px] px-[150px]! pb-14! pt-5! mb-[50px]! max-xl:px-[50px]! max-sm:px-[15px]! max-sm:pb-[20px]!'>
@@ -98,7 +100,7 @@ export function LeaderBoard({
                       </span>
                     </TableCell>
                     <TableCell className='p-2.5!'>
-                      {player[`score${mode}`] ?? 0}
+                      {player.totalScore ?? 0}
                     </TableCell>
                     <TableCell className='p-2.5! text-[#F5D91F] hidden lg:table-cell'>
                       0
@@ -111,7 +113,7 @@ export function LeaderBoard({
               </AnimatePresence>
             </TableBody>
           </Table>
-          {data && visibleCount < data.length && (
+          {players.length > visibleCount && (
             <div className='mt-6! flex justify-center'>
               <button
                 onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_PAGE)}

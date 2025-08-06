@@ -1,3 +1,3 @@
 export { LeaderBoard } from './view/leaderboard';
 
-export { useLeaderBoard } from './model/useLeaderBoard';
+export { useTopPlayers } from './model/use-leader-board';
