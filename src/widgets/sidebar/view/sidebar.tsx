@@ -173,7 +173,7 @@ export function Sidebar({
               Режим недоступен
             </DialogTitle>
           </DialogHeader>
-          <div className='flex items-center gap-8 mt-2!'>
+          <div className='flex items-center gap-8 mt-2! text-white/70'>
             Функция игры в формате 2 игроков пока находится в разработке.
           </div>
           <Button

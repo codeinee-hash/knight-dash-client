@@ -141,3 +141,38 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.spin-loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.progress-loader {
+  width: 120px;
+  height: 16px;
+  -webkit-mask: radial-gradient(circle closest-side, #f5d91f 94%, #0000)
+    left/20% 100%;
+  background: linear-gradient(#f5d91f 0 0) left/0% 100% no-repeat #494949;
+  animation: l17 2s infinite steps(6);
+}
+
+@keyframes l17 {
+  100% {
+    background-size: 120% 100%;
+  }
+}

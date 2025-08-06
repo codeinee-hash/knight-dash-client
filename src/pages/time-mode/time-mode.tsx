@@ -3,7 +3,7 @@ import timeModeImg from '@/shared/assets/images/Time-mode.svg';
 import blitzModeImg from '@/shared/assets/images/blitz-mode.svg';
 import bulletModeImg from '@/shared/assets/images/bullet-mode.svg';
 import rapidModeImg from '@/shared/assets/images/rapid-mode.svg';
-import { MultiContainer } from '@/shared/ui/multi-container/MultiContainer';
+import { MultiContainer } from '@/shared/ui/multi-container';
 import { PageHeader } from '@/shared/ui/page-header';
 import { PageLayout } from '@/widgets/page-layout';
 

@@ -4,7 +4,7 @@ import bulletMode from '@/shared/assets/images/bullet-mode.svg';
 import rapidMode from '@/shared/assets/images/rapid-mode.svg';
 
 import { LeaderboardFilter } from '@/features/leaderboard-filter';
-import { MultiContainer } from '@/shared/ui/multi-container/MultiContainer';
+import { MultiContainer } from '@/shared/ui/multi-container';
 import { PageHeader } from '@/shared/ui/page-header';
 import { LeaderBoard } from '@/widgets/leader-board';
 import { PageLayout } from '@/widgets/page-layout';

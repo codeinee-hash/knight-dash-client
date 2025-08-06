@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/ui/kit/table';
-import { Spin } from '@/shared/ui/spiner/spin';
+import { Spin } from '@/shared/ui/spin';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useState } from 'react';

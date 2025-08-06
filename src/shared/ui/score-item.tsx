@@ -1,9 +1,8 @@
-import clsx from 'clsx';
+import typeLogo from '@/shared/assets/images/geekcoin 150.svg';
+import totalGeekCoins from '@/shared/assets/images/total-coins.png';
+import { cn } from '@/shared/lib/utils';
 import type { FC } from 'react';
-import typeLogo from '../../assets/images/geekcoin 150.svg';
-import totalGeekCoins from '../../assets/images/total-coins.png';
-import type { CoinNaminals } from '../../utils/consts/consts';
-import classes from './score-item.module.scss';
+import type { CoinNaminals } from '../utils/consts/consts';
 
 export const ScoreItem: FC<{
   variant: 'single' | 'total';
@@ -15,8 +14,8 @@ export const ScoreItem: FC<{
   const coinValue = coinCount ? coinCount * nominal : 0;
 
   return (
-    <div className={classes.scoreItem}>
-      <div className={classes.label}>
+    <div className='w-full flex items-center justify-between'>
+      <div className='flex items-center gap-2.5 text-white'>
         <div>
           <img
             width={variant === 'total' ? 72 : 30}
@@ -28,9 +27,9 @@ export const ScoreItem: FC<{
         <p>{variant === 'single' ? `GeekCoin ${nominal}` : `GeekCoins`}</p>
       </div>
       <p
-        className={clsx(
-          classes.value,
-          variant === 'total' && classes.totalValue
+        className={cn(
+          'text-white text-base font-medium',
+          variant === 'total' && 'text-[#f5d91f]!'
         )}
       >
         {variant === 'single' ? coinValue : totalScore}

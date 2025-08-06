@@ -13,8 +13,8 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui/kit/alert-dialog';
 import { Button } from '@/shared/ui/kit/button';
-import { ProgresLoader } from '@/shared/ui/progress-loader/progress-loader';
-import { ScoreItem } from '@/shared/ui/score-item/score-item';
+import { ProgresLoader } from '@/shared/ui/progress-loader';
+import { ScoreItem } from '@/shared/ui/score-item';
 import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { useEffect, useState, type FC } from 'react';

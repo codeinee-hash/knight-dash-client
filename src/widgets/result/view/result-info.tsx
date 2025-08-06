@@ -13,7 +13,7 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui/kit/alert-dialog';
 import { Button } from '@/shared/ui/kit/button';
-import { ScoreItem } from '@/shared/ui/score-item/score-item';
+import { ScoreItem } from '@/shared/ui/score-item';
 import { ROUTES } from '@/shared/utils/consts/consts';
 import { getTimeModeImage } from '@/shared/utils/helpers';
 import { type FC } from 'react';
