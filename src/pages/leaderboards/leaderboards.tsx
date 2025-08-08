@@ -14,7 +14,7 @@ const LeaderBoards = () => {
   const [filter, setFilter] = useState('all');
 
   return (
-    <PageLayout>
+    <PageLayout>  
       <MultiContainer className='max-w-[970px] max-xl:max-w-full max-xl:px-[50px]! max-sm:px-0!'>
         <div className='flex flex-col py-6! max-xl:px-[40px]! max-sm:px-[15px]!'>
           <PageHeader title='Таблица лидеров' img={leaderboardImg} />
