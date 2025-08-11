@@ -27,6 +27,7 @@ import {
 import { Button } from '@/shared/ui/kit/button';
 import { ProgresLoader } from '@/shared/ui/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item';
+import { Spin } from '@/shared/ui/spin';
 import { useGame } from '@/shared/utils/hooks/use-game';
 import { useMediaQuery } from '@/shared/utils/hooks/use-media-query';
 import { PageLayout } from '@/widgets/page-layout';
@@ -104,9 +105,9 @@ const SoloGameRoom: FC = () => {
 
   if (isPending) {
     return (
-      <h1 className='text-3xl text-white/60 font-bold text-center mt-20!'>
-        Загрузка...
-      </h1>
+      <div className='w-full h-screen flex justify-center pt-[200px]!'>
+        <Spin />
+      </div>
     );
   }
 

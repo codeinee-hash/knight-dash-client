@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import { CellComponent } from '../../cell';
 import type { Cell } from '../../cell/model/cell';
 import { Board } from '../model/board';
-import classes from './board.module.scss';
 
 export const BoardComponent: FC<{
   board: Board;
@@ -84,8 +83,8 @@ export const BoardComponent: FC<{
   );
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.board}>
+    <div className='flex flex-col justify-center items-center gap-[15px]'>
+      <div className='w-[480px] h-[480px] flex flex-wrap max-[510px]:w-[352px] max-[510px]:h-[352px] max-[390px]:w-[288px] max-[390px]:h-[288px]'>
         {board.cells.map((row, idx) => (
           <React.Fragment key={idx}>
             {row.map((cell) => (

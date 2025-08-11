@@ -10,19 +10,37 @@ import {
 import { Input } from '@/shared/ui/kit/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { IMaskInput } from 'react-imask';
 import { authSchema } from '../lib/schema';
 import { useLogin } from '../model/use-login';
 
 export function LoginForm() {
-  const form = useForm({ resolver: zodResolver(authSchema) });
+  const form = useForm({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      login: '',
+      telephone: '+996',
+    },
+  });
 
   const { login, isPending } = useLogin();
+
+  const onSubmit = (data: { login: string; telephone: string }) => {
+    const formattedTelephone = data.telephone.startsWith('+996')
+      ? data.telephone
+      : `+996${data.telephone.replace(/^996/, '')}`.replace(/\s/g, '');
+
+    login({
+      login: data.login,
+      telephone: formattedTelephone,
+    });
+  };
 
   return (
     <Form {...form}>
       <form
         className='w-full flex flex-col items-center gap-[15px]'
-        onSubmit={form.handleSubmit(login)}
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
@@ -52,10 +70,17 @@ export function LoginForm() {
                 Телефон:
               </FormLabel>
               <FormControl>
-                <Input
-                  type='tel'
-                  placeholder='+996500210023'
+                <IMaskInput
                   {...field}
+                  mask='+{996} 000 000 000'
+                  lazy={false}
+                  placeholderChar='_'
+                  overwrite={true}
+                  onAccept={(value, mask) => field.onChange(mask.unmaskedValue)}
+                  value={field.value}
+                  placeholder='+996 ___ ___ ___'
+                  type='text'
+                  inputMode='numeric'
                   className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-2! text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
                 />
               </FormControl>
