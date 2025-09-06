@@ -8,33 +8,11 @@ import {
   FormMessage,
 } from '@/shared/ui/kit/form';
 import { Input } from '@/shared/ui/kit/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { IMaskInput } from 'react-imask';
-import { authSchema } from '../lib/schema';
 import { useLogin } from '../model/use-login';
 
 export function LoginForm() {
-  const form = useForm({
-    resolver: zodResolver(authSchema),
-    defaultValues: {
-      login: '',
-      telephone: '+996',
-    },
-  });
-
-  const { login, isPending } = useLogin();
-
-  const onSubmit = (data: { login: string; telephone: string }) => {
-    const formattedTelephone = data.telephone.startsWith('+996')
-      ? data.telephone
-      : `+996${data.telephone.replace(/^996/, '')}`.replace(/\s/g, '');
-
-    login({
-      login: data.login,
-      telephone: formattedTelephone,
-    });
-  };
+  const { form, onSubmit, isPending } = useLogin();
 
   return (
     <Form {...form}>
@@ -76,7 +54,7 @@ export function LoginForm() {
                   lazy={false}
                   placeholderChar='_'
                   overwrite={true}
-                  onAccept={(value, mask) => field.onChange(mask.unmaskedValue)}
+                  onAccept={(_, mask) => field.onChange(mask.unmaskedValue)}
                   value={field.value}
                   placeholder='+996 ___ ___ ___'
                   type='text'

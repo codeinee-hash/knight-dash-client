@@ -15,7 +15,7 @@ export const Timer: FC<Props> = ({
 }) => {
   const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const hasEndedRef = useRef(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
   const initialSecondsRef = useRef(initialSeconds);
 
   useEffect(() => {

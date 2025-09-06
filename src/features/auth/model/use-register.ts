@@ -1,15 +1,26 @@
 import { $mainApi } from '@/shared/api/axios';
 import { useSession } from '@/shared/model/use-session';
 import { ROUTES } from '@/shared/utils/consts/consts';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { authSchema } from '../lib/schema';
 import type { AuthData } from './types';
 
 export function useRegister() {
   const navigate = useNavigate();
   const login = useSession((s) => s.login);
+
+  const form = useForm({
+    resolver: zodResolver(authSchema),
+    defaultValues: {
+      login: '',
+      telephone: '+996',
+    },
+  });
 
   const registerMutation = useMutation({
     mutationFn: async (reqData: AuthData) => {
@@ -28,12 +39,20 @@ export function useRegister() {
     },
   });
 
-  const register = (data: AuthData) => {
-    registerMutation.mutate(data);
+  const onSubmit = (data: { login: string; telephone: string }) => {
+    const formattedTelephone = data.telephone.startsWith('+996')
+      ? data.telephone
+      : `+996${data.telephone.replace(/^996/, '')}`.replace(/\s/g, '');
+
+    registerMutation.mutate({
+      login: data.login,
+      telephone: formattedTelephone,
+    });
   };
 
   return {
-    register,
+    form,
+    onSubmit,
     isPending: registerMutation.isPending,
   };
 }

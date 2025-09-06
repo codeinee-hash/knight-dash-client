@@ -77,7 +77,7 @@ const SoloGameRoom: FC = () => {
     } else {
       setIsGameOver(true);
     }
-  }, [gameSession]);
+  }, [gameSession, setIsGameOver]);
 
   useEffect(() => {
     if (isGameOver) return;

@@ -11,7 +11,7 @@ export function useDeleteGame() {
       const res = await $authApi.delete(`/solo-game/${gameId}`);
       return res.data;
     },
-    onSuccess: (data, gameId) => {
+    onSuccess: (_, gameId) => {
       queryClient.invalidateQueries({ queryKey: ['solo-game', gameId] });
     },
     onError: (error: AxiosError) => {

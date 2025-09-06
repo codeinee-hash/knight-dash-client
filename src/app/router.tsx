@@ -1,7 +1,8 @@
 import { ROUTES } from '@/shared/utils/consts/consts';
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { App } from './app';
-import { AuthorizationGuard, protectedLoader } from './auth-guard';
+import { AuthorizationGuard } from './auth-guard';
+import { protectedLoader } from './protected-loader'
 
 export const router = createBrowserRouter([
   {

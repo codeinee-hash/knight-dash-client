@@ -79,7 +79,14 @@ export const BoardComponent: FC<{
         highlightCells();
       }
     },
-    [selectedCell, board, highlightCells, updateBoard]
+    [
+      selectedCell,
+      board,
+      highlightCells,
+      updateBoard,
+      submitScore,
+      params.gameId,
+    ]
   );
 
   return (
