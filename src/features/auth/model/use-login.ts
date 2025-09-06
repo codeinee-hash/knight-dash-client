@@ -33,20 +33,15 @@ export function useLogin() {
     },
     onError(error) {
       if (error instanceof AxiosError) {
-        console.log('Error with login: ', error);
         toast.error(error.response?.data?.message || 'Ошибка при авторизации');
       }
     },
   });
 
   const onSubmit = (data: { login: string; telephone: string }) => {
-    const formattedTelephone = data.telephone.startsWith('+996')
-      ? data.telephone
-      : `+996${data.telephone.replace(/^996/, '')}`.replace(/\s/g, '');
-
     loginMutation.mutate({
       login: data.login,
-      telephone: formattedTelephone,
+      telephone: data.telephone.replace(/\s/g, ''),
     });
   };
 
