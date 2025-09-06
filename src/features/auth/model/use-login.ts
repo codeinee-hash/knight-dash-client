@@ -33,6 +33,7 @@ export function useLogin() {
     },
     onError(error) {
       if (error instanceof AxiosError) {
+        console.log('Error with login: ', error);
         toast.error(error.response?.data?.message || 'Ошибка при авторизации');
       }
     },
@@ -42,9 +43,6 @@ export function useLogin() {
     const formattedTelephone = data.telephone.startsWith('+996')
       ? data.telephone
       : `+996${data.telephone.replace(/^996/, '')}`.replace(/\s/g, '');
-
-    console.log('before format: ', data.telephone);
-    console.log('after format: ', formattedTelephone);
 
     loginMutation.mutate({
       login: data.login,

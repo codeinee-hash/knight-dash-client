@@ -34,6 +34,7 @@ export function useRegister() {
     },
     onError(error) {
       if (error instanceof AxiosError) {
+        console.log('Error with register: ', error);
         toast.error(error.response?.data?.message || 'Ошибка при регистрации');
       }
     },

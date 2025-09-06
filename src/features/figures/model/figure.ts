@@ -38,7 +38,5 @@ export class Figure {
 
     target.figure = this;
     this.cell = target;
-
-    console.log('moved');
   }
 }
