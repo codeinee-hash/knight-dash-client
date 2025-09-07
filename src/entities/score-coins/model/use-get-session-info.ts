@@ -18,6 +18,7 @@ export interface SoloGameSessionInfo {
   updatedAt: string;
   __v: number;
 }
+
 export function useGetSessionInfo(gameId: string) {
   const sessionStatusQuery = useQuery({
     queryKey: ['solo-game-info', gameId],

@@ -15,16 +15,15 @@ export function useDeleteGame() {
       queryClient.invalidateQueries({ queryKey: ['solo-game', gameId] });
     },
     onError: (error: AxiosError) => {
-      console.error('Error deleting game:', error);
-      if (error.response?.status === 400) {
-        toast.error('Неверный формат gameId');
-      } else if (error.response?.status === 403) {
-        toast.error('У вас нет прав на удаление этой игры');
-      } else if (error.response?.status === 404) {
-        toast.error('Игра не найдена');
-      } else {
-        toast.error('Ошибка при удалении игры');
-      }
+      const errorMessages: { [key: number]: string } = {
+        400: 'Неверный формат gameId',
+        403: 'У вас нет прав на удаление этой игры',
+        404: 'Игра не найдена',
+      };
+
+      toast.error(
+        errorMessages[error.response?.status ?? 0] || 'Ошибка при удалении игры'
+      );
     },
   });
 
