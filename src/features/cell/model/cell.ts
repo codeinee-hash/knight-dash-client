@@ -1,5 +1,5 @@
 import type { Coin } from '@/entities/coin/model/coin';
-import { CoinNaminals, Colors } from '@/shared/utils/consts/consts';
+import { CoinNaminals, Colors } from '@/shared/utils/consts';
 import { nanoid } from 'nanoid';
 import type { Board } from '../../board/model/board';
 import type { Figure } from '../../figures/model/figure';

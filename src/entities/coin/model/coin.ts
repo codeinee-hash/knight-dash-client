@@ -6,7 +6,7 @@ import logo350 from '@/shared/assets/images/geekcoin 350.svg';
 import { nanoid } from 'nanoid';
 
 import type { Cell } from '@/features/cell/model/cell';
-import { CoinNaminals } from '@/shared/utils/consts/consts';
+import { CoinNaminals } from '@/shared/utils/consts';
 
 export class Coin {
   id: string;

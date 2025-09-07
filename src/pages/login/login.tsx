@@ -1,6 +1,6 @@
 import { LoginForm } from '@/features/auth';
 import { useSession } from '@/shared/model/use-session';
-import { ROUTES } from '@/shared/utils/consts/consts';
+import { ROUTES } from '@/shared/utils/consts';
 import { AuthLayout } from '@/widgets/auth-layout';
 import { type FC } from 'react';
 import { Link, Navigate } from 'react-router-dom';

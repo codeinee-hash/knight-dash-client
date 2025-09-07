@@ -1,6 +1,6 @@
 import { $mainApi } from '@/shared/api/axios';
 import { useSession } from '@/shared/model/use-session';
-import { ROUTES } from '@/shared/utils/consts/consts';
+import { ROUTES } from '@/shared/utils/consts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';

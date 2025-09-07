@@ -19,7 +19,7 @@ import {
   PopoverTrigger,
 } from '@/shared/ui/kit/popover';
 import { LogoutAlert } from '@/shared/ui/logout-alert';
-import { ROUTES, sidebarItems } from '@/shared/utils/consts/consts';
+import { ROUTES, sidebarItems } from '@/shared/utils/consts';
 import { GameRules } from '@/widgets/game-rules';
 import { LogOut, Menu } from 'lucide-react';
 import { useState } from 'react';

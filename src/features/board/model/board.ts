@@ -1,6 +1,6 @@
 import { Coin } from '@/entities/coin/model/coin';
-import { playSound } from '@/shared/utils/audio/sound';
-import { CoinNaminals, Colors } from '@/shared/utils/consts/consts';
+import { playSound } from '@/shared/utils/audio';
+import { CoinNaminals, Colors } from '@/shared/utils/consts';
 import { Cell } from '../../cell/model/cell';
 import { Knight } from '../../figures/model/knight';
 

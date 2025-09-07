@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import { create } from 'zustand';
 import { $mainApi } from '../api/axios';
-import { Tokens } from '../utils/consts/consts';
+import { Tokens } from '../utils/consts';
 
 type Session = {
   telephone: number;

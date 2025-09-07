@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/ui/kit/dialog';
-import { ROUTES } from '@/shared/utils/consts/consts';
+import { ROUTES } from '@/shared/utils/consts';
 import { useNavigate } from 'react-router-dom';
 
 export function GameRules() {

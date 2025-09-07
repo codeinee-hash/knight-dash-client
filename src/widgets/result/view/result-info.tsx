@@ -14,7 +14,7 @@ import {
 } from '@/shared/ui/kit/alert-dialog';
 import { Button } from '@/shared/ui/kit/button';
 import { ScoreItem } from '@/shared/ui/score-item';
-import { ROUTES } from '@/shared/utils/consts/consts';
+import { ROUTES } from '@/shared/utils/consts';
 import { getTimeModeImage } from '@/shared/utils/helpers';
 import { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import { useSession } from '@/shared/model/use-session';
-import { ROUTES } from '@/shared/utils/consts/consts';
+import { ROUTES } from '@/shared/utils/consts';
 import { redirect } from 'react-router-dom';
 
 export const protectedLoader = async () => {

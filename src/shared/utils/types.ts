@@ -1,4 +1,4 @@
-import type { CoinNaminals } from '../consts/consts';
+import type { CoinNaminals } from './consts';
 
 export interface LeaderBoardDto {
   _id: string;
