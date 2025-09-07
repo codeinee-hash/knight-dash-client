@@ -1,6 +1,6 @@
 import knightLogo from '@/shared/assets/images/white-knight.svg';
+import { FigureNames, type Colors } from '@/shared/lib/consts';
 import { nanoid } from 'nanoid';
-import { FigureNames, type Colors } from '@/shared/utils/consts';
 import type { Cell } from '../../cell/model/cell';
 
 export class Figure {

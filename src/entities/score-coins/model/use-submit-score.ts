@@ -1,5 +1,5 @@
 import { $authApi } from '@/shared/api/axios';
-import { useGame } from '@/shared/utils/hooks'
+import { useGame } from '@/shared/lib/hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 

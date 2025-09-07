@@ -8,8 +8,8 @@ import {
   AlertDialogTitle,
 } from '@/shared/ui/kit/alert-dialog';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../lib/consts';
 import { useSession } from '../model/use-session';
-import { ROUTES } from '../utils/consts';
 
 export function LogoutAlert() {
   const logout = useSession((state) => state.logout);

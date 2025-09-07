@@ -1,5 +1,5 @@
 import { $authApi } from '@/shared/api/axios';
-import { ROUTES } from '@/shared/utils/consts';
+import { ROUTES } from '@/shared/lib/consts';
 import { useMutation } from '@tanstack/react-query';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';

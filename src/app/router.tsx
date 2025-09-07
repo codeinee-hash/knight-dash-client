@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared/utils/consts';
+import { ROUTES } from '@/shared/lib/consts';
 import { createBrowserRouter, redirect } from 'react-router-dom';
 import { App } from './app';
 import { AuthorizationGuard } from './auth-guard';

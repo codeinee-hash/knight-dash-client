@@ -1,6 +1,6 @@
 import { RegisterForm } from '@/features/auth';
+import { ROUTES } from '@/shared/lib/consts';
 import { useSession } from '@/shared/model/use-session';
-import { ROUTES } from '@/shared/utils/consts';
 import { AuthLayout } from '@/widgets/auth-layout';
 import type { FC } from 'react';
 import { Link, Navigate } from 'react-router-dom';

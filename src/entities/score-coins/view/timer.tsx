@@ -1,4 +1,4 @@
-import { formatTime } from '@/shared/utils/helpers';
+import { formatTime } from '@/shared/lib/helpers';
 import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
 

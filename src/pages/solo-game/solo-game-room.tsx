@@ -15,6 +15,7 @@ import logo300 from '@/shared/assets/images/geekcoin 300.svg';
 import logo350 from '@/shared/assets/images/geekcoin 350.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
+import { useGame, useMediaQuery } from '@/shared/lib/hooks';
 import { useSession } from '@/shared/model/use-session';
 import {
   AlertDialog,
@@ -28,7 +29,6 @@ import { Button } from '@/shared/ui/kit/button';
 import { ProgresLoader } from '@/shared/ui/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item';
 import { Spin } from '@/shared/ui/spin';
-import { useGame, useMediaQuery } from '@/shared/utils/hooks';
 import { PageLayout } from '@/widgets/page-layout';
 import { ResultInfo } from '@/widgets/result';
 import { useCallback, useEffect, useMemo, useState, type FC } from 'react';

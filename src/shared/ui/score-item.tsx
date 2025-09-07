@@ -1,7 +1,7 @@
 import typeLogo from '@/shared/assets/images/geekcoin 150.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
 import { cn } from '@/shared/lib/utils';
-import type { CoinNaminals } from '../utils/consts';
+import type { CoinNaminals } from '../lib/consts';
 
 export function ScoreItem({
   variant,

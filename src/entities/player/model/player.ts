@@ -1,4 +1,4 @@
-import type { Colors } from '@/shared/utils/consts';
+import type { Colors } from '@/shared/lib/consts';
 
 export class Player {
   color: Colors;

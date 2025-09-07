@@ -16,7 +16,7 @@ import { Button } from '@/shared/ui/kit/button';
 import { ProgresLoader } from '@/shared/ui/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item';
 
-import { useGame, useMediaQuery } from '@/shared/utils/hooks';
+import { useGame, useMediaQuery } from '@/shared/lib/hooks';
 import { useEffect, useState, type FC } from 'react';
 import { useCreateSoloGame } from '../model/use-create-session';
 import type { SoloGameSessionInfo } from '../model/use-get-session-info';

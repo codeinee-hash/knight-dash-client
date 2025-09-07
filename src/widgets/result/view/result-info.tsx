@@ -5,6 +5,8 @@ import logo250 from '@/shared/assets/images/geekcoin 250.svg';
 import logo300 from '@/shared/assets/images/geekcoin 300.svg';
 import logo350 from '@/shared/assets/images/geekcoin 350.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
+import { ROUTES } from '@/shared/lib/consts';
+import { getTimeModeImage } from '@/shared/lib/helpers';
 import {
   AlertDialogAction,
   AlertDialogContent,
@@ -14,8 +16,6 @@ import {
 } from '@/shared/ui/kit/alert-dialog';
 import { Button } from '@/shared/ui/kit/button';
 import { ScoreItem } from '@/shared/ui/score-item';
-import { ROUTES } from '@/shared/utils/consts';
-import { getTimeModeImage } from '@/shared/utils/helpers';
 import { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 

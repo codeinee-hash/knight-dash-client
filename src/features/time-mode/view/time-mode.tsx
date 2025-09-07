@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared/utils/consts';
+import { ROUTES } from '@/shared/lib/consts';
 import { useNavigate } from 'react-router-dom';
 
 export function TimeModeItem({

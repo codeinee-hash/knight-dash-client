@@ -1,5 +1,5 @@
 import knightLogo from '@/shared/assets/images/white-knight.svg';
-import { Colors, FigureNames } from '@/shared/utils/consts';
+import { Colors, FigureNames } from '@/shared/lib/consts';
 import type { Cell } from '../../cell/model/cell';
 import { Figure } from './figure';
 

@@ -1,5 +1,5 @@
+import { ROUTES } from '@/shared/lib/consts';
 import { useSession } from '@/shared/model/use-session';
-import { ROUTES } from '@/shared/utils/consts';
 import type { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
