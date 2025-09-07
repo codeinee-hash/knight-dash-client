@@ -1,4 +1,4 @@
-import type { SoloGameSession } from '@/entities/score-coins/model/use-get-session-status';
+import type { SoloGameSession } from '@/entities/score-coins';
 import { MobileSidebar, Sidebar } from '@/widgets/sidebar';
 
 export function PageLayout({

@@ -1,11 +1,11 @@
+import type { SoloGameSessionInfo } from '@/entities/score-coins';
 import {
   ScoreCoins,
+  Timer,
   useCreateSoloGame,
   useGetSessionInfo,
   useGetSessionStatus,
 } from '@/entities/score-coins';
-import type { SoloGameSessionInfo } from '@/entities/score-coins/model/use-get-session-info';
-import { Timer } from '@/entities/score-coins/view/timer';
 import { BoardComponent } from '@/features/board';
 import { Board } from '@/features/board/model/board';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';

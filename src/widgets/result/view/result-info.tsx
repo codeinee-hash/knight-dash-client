@@ -1,4 +1,4 @@
-import type { SoloGameSessionInfo } from '@/entities/score-coins/model/use-get-session-info';
+import type { SoloGameSessionInfo } from '@/entities/score-coins';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
 import logo200 from '@/shared/assets/images/geekcoin 200.svg';
 import logo250 from '@/shared/assets/images/geekcoin 250.svg';

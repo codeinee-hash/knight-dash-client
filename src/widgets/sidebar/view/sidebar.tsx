@@ -1,5 +1,5 @@
+import type { SoloGameSession } from '@/entities/score-coins';
 import { useDeleteGame } from '@/entities/score-coins';
-import type { SoloGameSession } from '@/entities/score-coins/model/use-get-session-status';
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { ROUTES, sidebarItems } from '@/shared/lib/consts';
