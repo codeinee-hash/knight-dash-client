@@ -6,7 +6,7 @@ import rapidMode from '@/shared/assets/images/rapid-mode.svg';
 import { LeaderboardFilter } from '@/features/leaderboard-filter';
 import { MultiContainer } from '@/shared/ui/multi-container';
 import { PageHeader } from '@/shared/ui/page-header';
-import { LeaderBoard } from '@/widgets/leader-board';
+import { LeaderBoard } from '@/widgets/leaderboard';
 import { PageLayout } from '@/widgets/page-layout';
 import { useState } from 'react';
 

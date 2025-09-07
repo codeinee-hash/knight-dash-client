@@ -1,7 +1,6 @@
 import { $authApi } from '@/shared/api/axios';
 import { useQuery } from '@tanstack/react-query';
 
-// Интерфейсы для типизации данных
 interface TopPlayer {
   _id: string;
   login: string;
@@ -24,8 +23,8 @@ export function useTopPlayers() {
   return useQuery<TopPlayersResponse, Error>({
     queryKey: ['top-players'],
     queryFn: async () => {
-      const res = await $authApi.get('/top-players');
-      return res.data;
+      const { data } = await $authApi.get('/top-players');
+      return data;
     },
   });
 }
