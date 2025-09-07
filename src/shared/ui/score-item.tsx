@@ -1,16 +1,21 @@
 import typeLogo from '@/shared/assets/images/geekcoin 150.svg';
 import totalGeekCoins from '@/shared/assets/images/total-coins.png';
 import { cn } from '@/shared/lib/utils';
-import type { FC } from 'react';
 import type { CoinNaminals } from '../utils/consts/consts';
 
-export const ScoreItem: FC<{
+export function ScoreItem({
+  variant,
+  nominal,
+  coinCount,
+  logo,
+  totalScore,
+}: {
   variant: 'single' | 'total';
   nominal: CoinNaminals;
   coinCount: number;
   logo: typeof typeLogo | null;
   totalScore?: number;
-}> = ({ variant, nominal, coinCount, logo, totalScore }) => {
+}) {
   const coinValue = coinCount ? coinCount * nominal : 0;
 
   return (
@@ -36,4 +41,4 @@ export const ScoreItem: FC<{
       </p>
     </div>
   );
-};
+}

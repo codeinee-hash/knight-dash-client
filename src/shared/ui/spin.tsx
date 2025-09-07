@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
-export const Spin: FC = () => {
+export function Spin() {
   return <span className='spin-loader'></span>;
-};
+}

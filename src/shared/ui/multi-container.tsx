@@ -1,15 +1,13 @@
 import { cn } from '@/shared/lib/utils';
-import { type FC, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
-export type TMultiContainerProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-export const MultiContainer: FC<TMultiContainerProps> = ({
+export function MultiContainer({
   children,
   className,
-}) => {
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <div
       className={cn(
@@ -20,4 +18,4 @@ export const MultiContainer: FC<TMultiContainerProps> = ({
       {children}
     </div>
   );
-};
+}
