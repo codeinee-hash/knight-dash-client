@@ -37,19 +37,7 @@ export function GameRules() {
             максимум очков, собирая GeekCoin за отведённое время.
           </p>
           <p>
-            <span className='text-[#f5d91f]'>4.</span> Выберите режим игры:{' '}
-            <br />
-            <span className='font-bold'>Пулька:</span> 15 секунд на максимальный
-            результат.
-            <br />
-            <span className='font-bold'>Блиц:</span> 30 секунд для интенсивной
-            игры.
-            <br />
-            <span className='font-bold'>Раппид:</span> 60 секунд, чтобы показать
-            мастерство!
-          </p>
-          <p>
-            <span className='text-[#f5d91f]'>5.</span> Чем больше GeekCoin
+            <span className='text-[#f5d91f]'>4.</span> Чем больше GeekCoin
             соберёте, тем выше ваш рекорд в таблице лидеров!
           </p>
         </div>
