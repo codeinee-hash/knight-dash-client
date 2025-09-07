@@ -34,15 +34,20 @@ export function useRegister() {
     },
     onError(error) {
       if (error instanceof AxiosError) {
-        toast.error(error.response?.data?.message || 'Ошибка при регистрации');
+        toast.error(error.response?.data?.message || `Ошибка при регистрации`);
       }
     },
   });
 
   const onSubmit = (data: { login: string; telephone: string }) => {
+    let formattedTelephone = data.telephone.replace(/\s/g, '').trim();
+    if (!formattedTelephone.startsWith('+')) {
+      formattedTelephone = `+${formattedTelephone}`;
+    }
+
     registerMutation.mutate({
-      login: data.login,
-      telephone: data.telephone.replace(/\s/g, ''),
+      login: data.login.trim(),
+      telephone: formattedTelephone,
     });
   };
 

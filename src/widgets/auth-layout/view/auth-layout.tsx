@@ -25,7 +25,7 @@ export function AuthLayout({
         </CardHeader>
         <CardContent className='px-[50px] py-[80px]'>{form}</CardContent>
         <CardFooter className='flex justify-center'>
-          <p className='text-muted-foreground [&_a]:underline [&_a]:text-[##F5D91F] leading-[100%]'>
+          <p className='text-muted-foreground [&_a]:underline [&_a]:text-[##F5D91F] leading-[100%] text-center'>
             {footerText}
           </p>
         </CardFooter>

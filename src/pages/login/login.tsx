@@ -18,8 +18,7 @@ const Login: FC = () => {
       form={<LoginForm />}
       footerText={
         <>
-          Впервые здесь?{' '}
-          <Link to={ROUTES.REGISTER}>Зарегистрируйтесь бесплатно</Link>
+          Впервые здесь? <Link to={ROUTES.REGISTER}>Зарегистрироваться</Link>
         </>
       }
     />
