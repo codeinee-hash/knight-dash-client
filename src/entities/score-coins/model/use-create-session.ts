@@ -26,7 +26,7 @@ export function useCreateSoloGame() {
     },
     onError: (err) => {
       if (err.name === 'CanceledError') {
-        toast.info('Запрос отменён пользователем');
+        toast.info('Игра отменена');
       } else {
         toast.error('Ошибка при создании игры');
       }
