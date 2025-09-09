@@ -48,7 +48,7 @@ export function MobileSidebar({
         <PopoverTrigger asChild>
           <div className='fixed top-4 right-4 z-50 hidden max-md:block'>
             <button
-              onClick={() => setOpen(!open)}
+              onClick={() => setOpen((prev) => !prev)}
               className='text-yellow-400 bg-[#212121] p-2! rounded-md shadow'
             >
               <Menu className='w-6 h-6' />

@@ -17,18 +17,25 @@ import { ProgresLoader } from '@/shared/ui/progress-loader';
 import { ScoreItem } from '@/shared/ui/score-item';
 
 import { useGame, useMediaQuery } from '@/shared/lib/hooks';
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useState } from 'react';
 import { useCreateSoloGame } from '../model/use-create-session';
 import type { SoloGameSessionInfo } from '../model/use-get-session-info';
 import { GameModeSelect } from './game-mode-select';
 import { Timer } from './timer';
 
-export const ScoreCoins: FC<{
+type Props = {
   timer: number;
   isGameRoom: boolean;
   isRunning?: boolean;
   gameSession?: SoloGameSessionInfo;
-}> = ({ timer, isGameRoom, isRunning, gameSession }) => {
+};
+
+export function ScoreCoins({
+  timer,
+  isGameRoom,
+  isRunning,
+  gameSession,
+}: Props) {
   const [filter, setFilter] = useState('15');
   const [isCreatingGame, setIsCreatingGame] = useState(true);
 
@@ -145,4 +152,4 @@ export const ScoreCoins: FC<{
       </AlertDialog>
     </>
   );
-};
+}

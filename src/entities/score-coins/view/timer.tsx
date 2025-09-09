@@ -1,5 +1,4 @@
 import { formatTime } from '@/shared/lib/helpers';
-import type { FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 type Props = {
@@ -8,11 +7,7 @@ type Props = {
   isRunning?: boolean;
 };
 
-export const Timer: FC<Props> = ({
-  initialSeconds,
-  onEnd,
-  isRunning = true,
-}) => {
+export function Timer({ initialSeconds, onEnd, isRunning = true }: Props) {
   const [timeLeft, setTimeLeft] = useState(initialSeconds);
   const hasEndedRef = useRef(false);
   const intervalRef = useRef<number | null>(null);
@@ -75,4 +70,4 @@ export const Timer: FC<Props> = ({
       {formatTime(Number(timeLeft))}
     </div>
   );
-};
+}

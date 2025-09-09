@@ -5,8 +5,6 @@ import sidebarItems1 from '@/shared/assets/images/Pictograms.svg';
 import sidebarItems6 from '@/shared/assets/images/Settings.svg';
 import sidebarItems3 from '@/shared/assets/images/Time-mode.svg';
 
-export const baseURL = import.meta.env.VITE_API_URL;
-
 export const ROUTES = {
   HOME: '/',
   REGISTER: '/sign-up',
