@@ -1,12 +1,12 @@
-import geeksLogo from '@/shared/assets/images/Logo.svg';
-import { ROUTES } from '@/shared/lib/consts';
-import { Button } from '@/shared/ui/kit/button';
+import geeksLogo from '@/shared/assets/images/Logo.svg'
+import { ROUTES } from '@/shared/lib/consts'
+import { Button } from '@/shared/ui/kit/button'
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/shared/ui/kit/dialog';
-import { useNavigate } from 'react-router-dom';
+} from '@/shared/ui/kit/dialog'
+import { useNavigate } from 'react-router-dom'
 
 export function GameRules() {
   const navigate = useNavigate();
@@ -25,20 +25,16 @@ export function GameRules() {
         </div>
         <div className='rounded-[12px] bg-[#494949] p-4! text-white/70 text-base font-medium flex flex-col gap-1'>
           <p>
-            <span className='text-[#f5d91f]'>1.</span> Управляйте шахматным
-            конём и собирайте GeekCoin на игровом поле!
+            <span className='text-[#f5d91f]'>1.</span> Управляйте шахматным конём и собирайте GeekCoin на игровом поле!
           </p>
           <p>
-            <span className='text-[#f5d91f]'>2.</span> Делайте ходы конём только
-            по правилам шахмат (буквой "Г").
+            <span className='text-[#f5d91f]'>2.</span> Делайте ходы конём только по правилам шахмат (буквой "Г").
           </p>
           <p>
-            <span className='text-[#f5d91f]'>3.</span> Ваша цель — набрать
-            максимум очков, собирая GeekCoin за отведённое время.
+            <span className='text-[#f5d91f]'>3.</span> Ваша цель — набрать максимум очков, собирая GeekCoin за отведённое время.
           </p>
           <p>
-            <span className='text-[#f5d91f]'>4.</span> Чем больше GeekCoin
-            соберёте, тем выше ваш рекорд в таблице лидеров!
+            <span className='text-[#f5d91f]'>4.</span> Чем больше GeekCoin соберёте, тем выше ваш рекорд в таблице лидеров!
           </p>
         </div>
       </div>
