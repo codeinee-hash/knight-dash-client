@@ -1,4 +1,4 @@
-import { useGetSessionStatus } from '@/entities/score-coins';
+import { useGetSessionStatus } from '@/entities/solo-game';
 import { Spin } from '@/shared/ui/spin';
 import { PageLayout } from '@/widgets/page-layout';
 import { SoloGame } from '@/widgets/solo-game';

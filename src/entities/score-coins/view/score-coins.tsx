@@ -18,8 +18,8 @@ import { ScoreItem } from '@/shared/ui/score-item';
 
 import { useGame, useMediaQuery } from '@/shared/lib/hooks';
 import { useEffect, useState } from 'react';
-import { useCreateSoloGame } from '../model/use-create-session';
-import type { SoloGameSessionInfo } from '../model/use-get-session-info';
+import { useCreateSoloGame } from '../../solo-game/model/use-create-session';
+import type { SoloGameSessionInfo } from '../../solo-game/model/use-get-session-info';
 import { GameModeSelect } from './game-mode-select';
 import { Timer } from './timer';
 

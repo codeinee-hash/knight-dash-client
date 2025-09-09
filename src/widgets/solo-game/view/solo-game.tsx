@@ -2,10 +2,13 @@ import type { SoloGameSessionInfo } from '@/entities/score-coins';
 import {
   ScoreCoins,
   Timer,
-  useCreateSoloGame,
-  useGetSessionInfo,
   type SoloGameSession,
 } from '@/entities/score-coins';
+import {
+  useConnectSoloGameSocket,
+  useCreateSoloGame,
+  useGetSessionInfo,
+} from '@/entities/solo-game';
 import { BoardComponent } from '@/features/board';
 import { Board } from '@/features/board/model/board';
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
@@ -59,9 +62,16 @@ export function SoloGame({ gameSession }: { gameSession: SoloGameSession }) {
     [gameSession]
   );
 
+  const { resData, handleGameEnd, error } = useConnectSoloGameSocket();
+
   const handleGameOver = useCallback(() => {
     setIsGameOver(true);
-  }, [setIsGameOver]);
+    handleGameEnd();
+  }, [setIsGameOver, handleGameEnd]);
+
+  useEffect(() => {
+    setIsGameOver(true);
+  }, [error, setIsGameOver]);
 
   useEffect(() => {
     setIsCreatingGame(createGame.isPending);
@@ -133,7 +143,7 @@ export function SoloGame({ gameSession }: { gameSession: SoloGameSession }) {
               timer={initialSeconds}
               isGameRoom
               isRunning={!isGameOver}
-              gameSession={soloGameInfo}
+              gameSession={resData!}
             />
           )}
 
@@ -144,31 +154,31 @@ export function SoloGame({ gameSession }: { gameSession: SoloGameSession }) {
                   <ScoreItem
                     variant='single'
                     nominal={150}
-                    coinCount={soloGameInfo?.score150 as number}
+                    coinCount={resData?.score150 as number}
                     logo={logo150}
                   />
                   <ScoreItem
                     variant='single'
                     nominal={200}
-                    coinCount={soloGameInfo?.score200 as number}
+                    coinCount={resData?.score200 as number}
                     logo={logo200}
                   />
                   <ScoreItem
                     variant='single'
                     nominal={250}
-                    coinCount={soloGameInfo?.score250 as number}
+                    coinCount={resData?.score250 as number}
                     logo={logo250}
                   />
                   <ScoreItem
                     variant='single'
                     nominal={300}
-                    coinCount={soloGameInfo?.score300 as number}
+                    coinCount={resData?.score300 as number}
                     logo={logo300}
                   />
                   <ScoreItem
                     variant='single'
                     nominal={350}
-                    coinCount={soloGameInfo?.score350 as number}
+                    coinCount={resData?.score350 as number}
                     logo={logo350}
                   />
                 </div>
@@ -179,7 +189,7 @@ export function SoloGame({ gameSession }: { gameSession: SoloGameSession }) {
                   <ScoreItem
                     variant='total'
                     logo={totalGeekCoins}
-                    coinCount={soloGameInfo?.score350 as number}
+                    coinCount={resData?.score350 as number}
                     nominal={350}
                     totalScore={board.totalScore}
                   />

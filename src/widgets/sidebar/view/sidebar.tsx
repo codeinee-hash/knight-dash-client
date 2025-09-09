@@ -1,5 +1,5 @@
 import type { SoloGameSession } from '@/entities/score-coins';
-import { useDeleteGame } from '@/entities/score-coins';
+import { useDeleteGame } from '@/entities/solo-game';
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { ROUTES, sidebarItems } from '@/shared/lib/consts';
@@ -19,7 +19,7 @@ import { LogoutAlert } from '@/shared/ui/logout-alert';
 import { GameRules } from '@/widgets/game-rules';
 import { ChevronRight, LogOut } from 'lucide-react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function Sidebar({
   soloGameSession,
@@ -37,6 +37,7 @@ export function Sidebar({
   const removeGameSession = useDeleteGame();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
@@ -126,7 +127,17 @@ export function Sidebar({
       </Sheet>
 
       <Dialog open={isGameRulesOpen} onOpenChange={setIsGameRulesOpen}>
-        <GameRules />
+        <GameRules
+          onStartGame={() => {
+            if (
+              `/${location.pathname.split('/').filter(Boolean).pop()}` ===
+              ROUTES.SOLO_GAME
+            ) {
+              setIsGameRulesOpen(false);
+            }
+            navigate(ROUTES.SOLO_GAME);
+          }}
+        />
       </Dialog>
 
       <Dialog open={isGameProccess} onOpenChange={setIsGameProccess}>

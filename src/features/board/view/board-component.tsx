@@ -1,4 +1,4 @@
-import { useSubmitScore } from '@/entities/score-coins';
+import { socketApi } from '@/entities/solo-game/api/socket-api';
 import type { FC } from 'react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ export const BoardComponent: FC<{
 }> = React.memo(({ board, setBoard }) => {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
   const [availableCells, setAvailableCells] = useState<[number, number][]>([]);
-  const { submitScore } = useSubmitScore();
+  // const { submitScore } = useSubmitScore();
 
   const params = useParams();
 
@@ -68,7 +68,11 @@ export const BoardComponent: FC<{
 
         if (hadCoin && coinNaminal) {
           const score = coinNaminal;
-          submitScore({ gameId: String(params.gameId), score });
+          socketApi.socket?.emit('client-submit-score-path', {
+            gameId: String(params.gameId),
+            score,
+          });
+          // submitScore({ gameId: String(params.gameId), score });
         }
 
         return;
@@ -84,7 +88,7 @@ export const BoardComponent: FC<{
       board,
       highlightCells,
       updateBoard,
-      submitScore,
+      // submitScore,
       params.gameId,
     ]
   );
