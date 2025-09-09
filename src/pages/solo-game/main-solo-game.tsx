@@ -11,14 +11,10 @@ const SoloGameRoom: FC = () => {
   const session = useSession((state) => state.session);
 
   useEffect(() => {
-    init();
-  }, []);
-
-  function init() {
     const newBoard = new Board();
     newBoard.initCells();
     setBoard(newBoard);
-  }
+  }, []);
 
   return (
     <PageLayout>
