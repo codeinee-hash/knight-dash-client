@@ -1,5 +1,4 @@
-import type { SoloGameSession } from '@/entities/score-coins';
-import { useDeleteGame } from '@/entities/solo-game';
+import { useDeleteGame, type SoloGameSession } from '@/entities/solo-game';
 import geeksLogo from '@/shared/assets/images/geeks 2.png';
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
 import { ROUTES, sidebarItems } from '@/shared/lib/consts';
@@ -162,7 +161,7 @@ export function Sidebar({
             <Button
               type='button'
               onClick={() => {
-                removeGameSession.deleteGame(soloGameSession.gameId, {
+                removeGameSession.deleteGame(soloGameSession._id, {
                   onSuccess() {
                     navigate(ROUTES.SOLO_GAME, { replace: true });
                   },

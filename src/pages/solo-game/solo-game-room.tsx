@@ -27,7 +27,7 @@ const SoloGameRoom: FC = () => {
 
   return (
     <PageLayout soloGameSession={gameSession}>
-      <SoloGame gameSession={gameSession} />
+      <SoloGame />
     </PageLayout>
   );
 };

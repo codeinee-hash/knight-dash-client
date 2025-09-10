@@ -1,4 +1,4 @@
-import type { SoloGameSession } from '@/entities/score-coins';
+import type { SoloGameSession } from '@/entities/solo-game';
 import { MobileSidebar, Sidebar } from '@/widgets/sidebar';
 
 export function PageLayout({

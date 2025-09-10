@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { socketApi } from '../api/socket-api';
-import type { SoloGameSessionInfo } from './use-get-session-info';
+import type { SoloGameSession } from '../types/solo-game.types';
 
 export function useConnectSoloGameSocket() {
-  const [resData, setResData] = useState<SoloGameSessionInfo | null>(null);
+  const [resData, setResData] = useState<SoloGameSession | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   function connectSocket() {
@@ -14,8 +14,13 @@ export function useConnectSoloGameSocket() {
 
     socketApi.socket?.on(
       'server-submit-score-path',
-      (data: SoloGameSessionInfo) => {
-        setResData(data);
+      (data: SoloGameSession) => {
+        setResData((prev) => {
+          if (JSON.stringify(prev) !== JSON.stringify(data)) {
+            return data;
+          }
+          return prev;
+        });
 
         if (data.finished) {
           socketApi.socket?.disconnect();
@@ -36,14 +41,16 @@ export function useConnectSoloGameSocket() {
     );
   }
 
-  const handleGameEnd = () => {
+  function handleGameEnd() {
+    socketApi.socket?.off('server-submit-score-path');
+    socketApi.socket?.off('server-error');
     socketApi.disconnect();
-  };
+  }
 
-  const reconnectSocket = () => {
+  function reconnectSocket() {
     socketApi.disconnect();
     connectSocket();
-  };
+  }
 
   useEffect(() => {
     connectSocket();

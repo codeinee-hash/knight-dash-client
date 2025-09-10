@@ -1,4 +1,4 @@
-import type { SoloGameSessionInfo } from '@/entities/score-coins';
+import type { SoloGameSession } from '@/entities/solo-game'
 import logo150 from '@/shared/assets/images/geekcoin 150.svg';
 import logo200 from '@/shared/assets/images/geekcoin 200.svg';
 import logo250 from '@/shared/assets/images/geekcoin 250.svg';
@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const ResultInfo: FC<{
   onRestart: () => void;
-  gameSession: SoloGameSessionInfo;
+  gameSession: SoloGameSession;
 }> = ({ onRestart, gameSession }) => {
   const navigate = useNavigate();
 

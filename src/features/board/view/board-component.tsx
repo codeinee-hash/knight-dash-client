@@ -35,21 +35,13 @@ export const BoardComponent: FC<{
     }
   }, [board, selectedCell]);
 
-  const updateBoard = useCallback(() => {
-    const newBoard = board.getCopyBoard();
-    setBoard(newBoard);
-  }, [board, setBoard]);
-
-  useEffect(() => {
-    highlightCells();
-  }, [selectedCell, highlightCells]);
-
   const onClick = useCallback(
     (cell: Cell) => {
       if (selectedCell === cell) {
         setSelectedCell(null);
         setAvailableCells([]);
         board.clearHighlights();
+        setBoard(board);
         return;
       }
 
@@ -59,22 +51,20 @@ export const BoardComponent: FC<{
         selectedCell.figure?.canMove(cell)
       ) {
         const hadCoin = !!cell.coin;
-        const coinNaminal = cell.coin?.naminal;
+        const coinNominal = cell.coin?.naminal;
         board.moveFigure(selectedCell, cell);
         setSelectedCell(null);
         setAvailableCells([]);
         board.clearHighlights();
-        updateBoard();
+        setBoard(board);
 
-        if (hadCoin && coinNaminal) {
-          const score = coinNaminal;
+        if (hadCoin && coinNominal) {
+          const score = coinNominal;
           socketApi.socket?.emit('client-submit-score-path', {
             gameId: String(params.gameId),
             score,
           });
-          // submitScore({ gameId: String(params.gameId), score });
         }
-
         return;
       }
 
@@ -83,15 +73,12 @@ export const BoardComponent: FC<{
         highlightCells();
       }
     },
-    [
-      selectedCell,
-      board,
-      highlightCells,
-      updateBoard,
-      // submitScore,
-      params.gameId,
-    ]
+    [selectedCell, board, highlightCells, setBoard, params.gameId]
   );
+
+  useEffect(() => {
+    highlightCells();
+  }, [selectedCell, highlightCells]);
 
   return (
     <div className='flex flex-col justify-center items-center gap-[15px]'>

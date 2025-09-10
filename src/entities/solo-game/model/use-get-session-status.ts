@@ -1,18 +1,6 @@
 import { $authApi } from '@/shared/api/axios';
 import { useQuery } from '@tanstack/react-query';
-
-export interface SoloGameSession {
-  gameId: string;
-  timeMode: number;
-  remainingTime: number;
-  totalScore: number;
-  coint150: number;
-  coint200: number;
-  coint250: number;
-  coint300: number;
-  coint350: number;
-  finished: boolean;
-}
+import type { SoloGameSession } from '../types/solo-game.types';
 
 export function useGetSessionStatus(gameId: string) {
   const sessionStatusQuery = useQuery({
@@ -25,6 +13,7 @@ export function useGetSessionStatus(gameId: string) {
     },
     enabled: !!gameId,
     staleTime: Infinity,
+    refetchInterval: false,
     refetchOnWindowFocus: false,
   });
 
