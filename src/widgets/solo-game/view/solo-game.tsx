@@ -3,7 +3,6 @@ import {
   useConnectSoloGameSocket,
   useCreateSoloGame,
   useGetSessionInfo,
-  useGetSessionStatus,
   type SoloGameSession,
 } from '@/entities/solo-game';
 import { BoardComponent } from '@/features/board';
@@ -31,7 +30,6 @@ export function SoloGame() {
   const session = useSession((state) => state.session);
   const isDesktop = useMediaQuery('(min-width: 1201px)');
   const params = useParams();
-  const { gameSession } = useGetSessionStatus(String(params.gameId));
 
   const [isCreatingGame, setIsCreatingGame] = useState(false);
   const [board, setBoard] = useState(() => {
@@ -42,9 +40,7 @@ export function SoloGame() {
     return initialBoard;
   });
 
-  const { gameSession: soloGameInfo } = useGetSessionInfo(
-    String(params.gameId)
-  );
+  const { gameSession } = useGetSessionInfo(String(params.gameId));
 
   const { isGameOver, setIsGameOver } = useGame();
   const createGame = useCreateSoloGame();
@@ -140,7 +136,7 @@ export function SoloGame() {
 
       <AlertDialog open={isGameOver} onOpenChange={setIsGameOver}>
         <ResultInfo
-          gameSession={resData ?? (soloGameInfo as SoloGameSession)}
+          gameSession={resData ?? (gameSession as SoloGameSession)}
           onRestart={() => {
             createGame.create(Number(gameSession?.timeMode));
             reconnectSocket();

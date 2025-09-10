@@ -1,4 +1,4 @@
-import { useGetSessionStatus } from '@/entities/solo-game';
+import { useGetSessionInfo } from '@/entities/solo-game';
 import { Spin } from '@/shared/ui/spin';
 import { PageLayout } from '@/widgets/page-layout';
 import { SoloGame } from '@/widgets/solo-game';
@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 const SoloGameRoom: FC = () => {
   const params = useParams();
-  const { gameSession, isPending } = useGetSessionStatus(String(params.gameId));
+  const { gameSession, isPending } = useGetSessionInfo(String(params.gameId));
 
   if (isPending) {
     return (

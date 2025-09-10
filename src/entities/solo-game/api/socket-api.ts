@@ -1,3 +1,4 @@
+import { CONFIG } from '@/shared/model/config';
 import { io, Socket } from 'socket.io-client';
 
 type SocketApiType = {
@@ -10,7 +11,7 @@ export const socketApi: SocketApiType = {
   socket: null,
   createConnection() {
     if (!this.socket) {
-      this.socket = io('http://localhost:8080/');
+      this.socket = io(CONFIG.SOCKET_URL);
 
       this.socket.on('connect', () => {
         console.log('CLIENT CONNECTED');
