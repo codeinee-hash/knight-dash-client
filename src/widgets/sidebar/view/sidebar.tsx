@@ -38,6 +38,39 @@ export function Sidebar({
   const navigate = useNavigate();
   const location = useLocation();
 
+  function onSideberItemClick(value: string) {
+    if (soloGameSession && !soloGameSession.finished) {
+      setOpen(false);
+      setIsGameProccess(true);
+      return;
+    }
+
+    switch (value) {
+      case 'Правила игры':
+        setIsGameRulesOpen(true);
+        break;
+      case 'Таблица лидеров':
+        navigate(ROUTES.LEADERBOARDS);
+        break;
+      case 'Режимы времени':
+        navigate(ROUTES.TIME_MODE);
+        break;
+      case 'Настройки':
+        navigate(ROUTES.SETTINGS);
+        break;
+      case 'Один игрок':
+        navigate(ROUTES.SOLO_GAME);
+        break;
+      case 'Два игрока':
+        setIsDuelDevModal(true);
+        break;
+      default:
+        break;
+    }
+
+    setOpen(false);
+  }
+
   return (
     <>
       {!open && (
@@ -78,30 +111,7 @@ export function Sidebar({
                 <div
                   key={idx}
                   className='w-full py-3! px-6! rounded text-base font-medium flex items-center gap-2.5 cursor-pointer hover:bg-[#494949]'
-                  onClick={() => {
-                    if (soloGameSession && !soloGameSession.finished) {
-                      setOpen(false);
-                      setIsGameProccess(true);
-                      return;
-                    }
-
-                    if (item.lable === 'Правила игры') {
-                      setIsGameRulesOpen(true);
-                    } else if (item.lable === 'Таблица лидеров') {
-                      navigate(ROUTES.LEADERBOARDS);
-                    } else if (item.lable === 'Режимы времени') {
-                      navigate(ROUTES.TIME_MODE);
-                    } else if (item.lable === 'Настройки') {
-                      navigate(ROUTES.SETTINGS);
-                    } else if (item.lable === 'Один игрок') {
-                      navigate(ROUTES.SOLO_GAME);
-                    } else if (item.lable === 'Два игрока') {
-                      // navigate(ROUTES.GAME_DUEL);
-                      setIsDuelDevModal(true);
-                    }
-
-                    setOpen(false);
-                  }}
+                  onClick={() => onSideberItemClick(item.lable)}
                 >
                   <img
                     src={item.icon}

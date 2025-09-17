@@ -7,7 +7,6 @@ export function useConnectSoloGameSocket() {
   const [error, setError] = useState<string | null>(null);
 
   function connectSocket() {
-    console.log('socketApi.socket: ', socketApi.socket);
     if (!socketApi.socket) {
       socketApi.createConnection();
     }
@@ -56,7 +55,6 @@ export function useConnectSoloGameSocket() {
     connectSocket();
 
     return () => {
-      console.log('Cleaned socket connect');
       socketApi.socket?.off('server-submit-score-path');
       socketApi.socket?.off('server-error');
       socketApi.disconnect();

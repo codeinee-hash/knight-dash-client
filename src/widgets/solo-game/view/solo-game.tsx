@@ -95,8 +95,6 @@ export function SoloGame() {
 
   const memoizedBoard = useMemo(() => board, [board]);
 
-  console.log('Render Solo-Game-Component');
-
   return (
     <>
       <div className='w-full'>
