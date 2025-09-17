@@ -1,4 +1,5 @@
 import playerLogo from '@/shared/assets/images/yellow-logo.svg';
+import { useSession } from '@/shared/model/use-session';
 import {
   Table,
   TableBody,
@@ -27,6 +28,7 @@ export function LeaderBoard({
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
   const { data, isLoading } = useTopPlayers();
+  const { session } = useSession();
 
   const modeData = data?.data.find((item) => item.timeMode === Number(mode));
   const players = modeData?.players || [];
@@ -96,7 +98,7 @@ export function LeaderBoard({
                         />
                       </div>
                       <span className='truncate whitespace-nowrap overflow-hidden max-w-[100px]'>
-                        {player.login}
+                        {player.login} {player.login === session?.login && '⭐'}
                       </span>
                     </TableCell>
                     <TableCell className='p-2.5!'>
