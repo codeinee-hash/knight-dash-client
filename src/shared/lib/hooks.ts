@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'
 import { create } from 'zustand';
 
 export const useDisableScroll = (bool: boolean) => {
@@ -49,3 +50,16 @@ export const useGame = create<TUseGameProps>()((set) => {
     setIsGameOver: (value: boolean) => set({ isGameOver: value }),
   };
 });
+
+export const useScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [location]);
+};
+

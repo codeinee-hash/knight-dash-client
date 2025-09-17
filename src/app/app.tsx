@@ -1,10 +1,13 @@
 import { queryClient } from '@/shared/api/query-client';
+import { useScrollToTop } from '@/shared/lib/hooks';
 import { QueryClientProvider } from '@tanstack/react-query';
 import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'sonner';
 
 export const App: FC = () => {
+  useScrollToTop();
+
   return (
     <QueryClientProvider client={queryClient}>
       <main className='min-h-screen flex flex-col'>
