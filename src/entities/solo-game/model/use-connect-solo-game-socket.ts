@@ -52,7 +52,7 @@ export function useConnectSoloGameSocket() {
     connectSocket();
   }
 
-  useEffect(() => {
+  useEffect(() => { 
     connectSocket();
 
     return () => {
